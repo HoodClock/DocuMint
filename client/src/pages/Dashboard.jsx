@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { UploadFile, GridView, History, Settings, Logout, Info, AccountCircle, Notifications, AttachFile } from '@mui/icons-material';
+import { GridView, History, Settings, Logout, Info, AccountCircle, Notifications, AttachFile } from '@mui/icons-material';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
+import CloseIcon from '@mui/icons-material/Close';
 import NftCollection from '../components/NftCollections'
 import TxHistory from '../components/TxHistory'
 import Documentation from '../components/Documentation'
@@ -7,6 +9,15 @@ import Documentation from '../components/Documentation'
 function Dashboard() {
 
     const [activeTab, setActiveTab] = useState('NFT');
+    const [activeUploadDocs, setActiveUploadDocs] = useState();
+
+    const handleOpenModel = async () => {
+        setActiveUploadDocs(true);
+    }
+
+    const handleCloseModel = async () => {
+        setActiveUploadDocs(false);
+    }
 
     return (
         <div className="flex min-h-screen bg-[#111318] text-white font-roboto">
@@ -63,39 +74,77 @@ function Dashboard() {
                 </header>
 
                 {/* Hero Section - Upload Document Box */}
-                <div className="flex flex-wrap space-x-8"> {/* Flex container for side-by-side layout */}
+                <div className="flex flex-wrap justify-center items-center h-screen space-x-8"> {/* Flex container for side-by-side layout */}
 
-                    {/* Hero Section - Upload Document Box */}
-                    <section className="bg-[#000000] p-6 rounded-lg shadow-lg mb-10 border-b-[#141721] max-w-md">
-                        <h2 className="text-2xl font-bold text-white mb-4 tracking-wide text-center">Mint Document Now</h2>
+                    {/* Container Box with Upload Icon and Text */}
+                    <div
+                        className="bg-[#000000] p-10 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
+                        onClick={handleOpenModel} // Open modal on click
+                    >
+                        <UploadFileIcon style={{ color: '#DBFD2D', fontSize: '5rem' }} />
+                        <p className="mt-4 text-white font-bold text-center text-lg">Click to upload your document!</p>
+                    </div>
 
-                        <div className="flex flex-col items-center p-6 bg-[#000000]  rounded-lg shadow-md">
-                            <div className="text-6xl font-bold text-white mb-2">
-                                <UploadFile />
-                            </div>
-                            <p className="font-bold text-lg mb-2 text-white">Upload a file or drag & drop here</p>
-                            <p className="font-bold text-sm text-white mb-4">Choose your document type below:</p>
-
-                            <div className="mt-5 w-3/4">
-                                <label htmlFor="documentType" className="block text-gray-500 mb-2 font-bold">Select Document Type</label>
-                                <select
-                                    id="documentType"
-                                    className="w-full p-3 rounded bg-black text-white border font-bold"
+                    {/* Modal for Upload Details */}
+                    {activeUploadDocs && (
+                        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center">
+                            <div className="bg-[#141721] p-10 rounded-lg shadow-lg w-full max-w-lg relative">
+                                {/* Close Button */}
+                                <button
+                                    className="absolute top-2 right-2 text-[#DBFD2D] hover:text-[#8FFD2D] transition-colors"
+                                    onClick={handleCloseModel} // Close modal on click
                                 >
-                                    <option className="bg-black text-white">Legal</option>
-                                    <option className="bg-black text-white">Personal</option>
-                                    <option className="bg-black text-white">Official</option>
-                                    <option className="bg-black text-white">Educational</option>
-                                </select>
-                            </div>
-
-                            <div className="mt-8 flex justify-center w-full">
-                                <button className="bg-[#DBFD2D] text-black py-3 w-full shadow-lg rounded-full  transition-all duration-200">
-                                    Transform to NFT
+                                    <CloseIcon />
                                 </button>
+
+                                <h2 className="text-2xl font-bold text-[#DBFD2D] mb-6 text-center">Upload Document Details</h2>
+
+                                {/* Input Fields */}
+                                <div className="mb-4">
+                                    <label htmlFor="docName" className="block text-[#ffffff] mb-2 font-bold">Document Name</label>
+                                    <input
+                                        id="docName"
+                                        type="text"
+                                        className="w-full p-3 rounded bg-[#000000] text-[#ffffff] focus:border-[#8FFD2D] transition-colors"
+                                        placeholder="Enter Document Name"
+                                    />
+                                </div>
+
+                                <div className="mb-4">
+                                    <label htmlFor="docDesc" className="block text-[#ffffff] mb-2 font-bold">Document Description (Optional)</label>
+                                    <textarea
+                                        id="docDesc"
+                                        rows="3"
+                                        className="w-full p-3 rounded bg-[#000000] text-[#ffffff] transition-colors"
+                                        placeholder="Enter a short description"
+                                    />
+                                </div>
+
+                                <div className="mb-6">
+                                    <label htmlFor="documentType" className="block text-[#f9f9f9] mb-2 font-bold">Select Document Type</label>
+                                    <select
+                                        id="documentType"
+                                        className="w-full p-3 rounded bg-[#000000] text-[#ededed] transition-colors"
+                                    >
+                                        <option className="bg-black text-[#DBFD2D]">Legal</option>
+                                        <option className="bg-black text-[#DBFD2D]">Personal</option>
+                                        <option className="bg-black text-[#DBFD2D]">Official</option>
+                                        <option className="bg-black text-[#DBFD2D]">Educational</option>
+                                    </select>
+                                </div>
+
+                                {/* Transform Button */}
+                                <div className="mt-8 flex justify-center">
+                                    <button
+                                        className="bg-[#DBFD2D] text-black py-3 w-full shadow-lg rounded-full hover:bg-[#eeee47] transition-all duration-600 font-bold"
+                                        onClick={() => alert('Transform to NFT')} // Placeholder for transform action
+                                    >
+                                        Transform to NFT
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </section>
+                    )}
 
                     {/* Right: Recent Activity Box */}
                     <section className="bg-[#000000] p-6 rounded-lg mb-10 shadow-lg border-b-[#141721] flex-grow">

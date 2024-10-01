@@ -21,6 +21,31 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+// ALL OF THE ENDPOINTS
+
+// AUTH Endpoints
+app.use('/api/auth/signup'); // POST
+app.use('/api/auth/login'); // POST
+app.use('/api/auth/logout'); // GET
+app.use('/api/user/profile'); // GET
+
+// Document Management endpoint
+app.use('/api/documents/upload'); // POST
+
+// NFT creation and management
+app.use('/api/nfts/create'); // POST
+app.use('/api/nfts'); // GET
+app.use('/api/nfts/:id'); // GET
+
+// Transaction endpoint
+app.use('/api/transactions'); // GET
+
+// Wallet integration 
+app.use('/api/wallet/connect'); // POST
+app.use('/api/wallet/status'); // GET
+
+
 // Error handling 
 app.use((err, req, res, next) => {
     console.log(err.stack);
