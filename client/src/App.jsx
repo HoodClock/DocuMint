@@ -1,15 +1,22 @@
 import './App.css'
-import ConvertDocument from './pages/ConvertDocument'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
-
+import Home from './pages/Home'
+import SignUp from './pages/SignUp'
 
 function App() {
 
   return (
     <>
-      <div className='bg-zinc-900 h-screen w-screen'>
-        <Dashboard />
-      </div>
+      <Router>
+        <div className='bg-zinc-900 h-screen w-screen'>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   )
 }

@@ -1,26 +1,33 @@
-const { User, hashingPassword, matchPassword } = require('../models/User.model');
+const userModel = require('../models/User.model');
 const jwt = require('jsonwebtoken');
 
+// Create Account✅
+// Login
+// Delete
 
 exports.signUp = async (req, res) => {
-
     try {
-        const { username, email, password } = req.body;
-    
-        if (!username || !email || !password) {
+        const { username, email, password, walletAddress } = req.body;
+
+        if (!username || !email || !password || !walletAddress) {
             res.status(401).json({ message: "User Credentials are missing" });
         }
-    
-        const hashPssword = hashingPassword(password);
-    
-        const new_user = await User.create({
-            username: username,
-            email: email,
-            password: hashingPassword
+
+        const new_user = await userModel.create({
+            username,
+            email,
+            password,
+            walletAddress
         });
-    
+
+        const token = jwt.sign({ id: new_user._id }, process.env.JWTSECRETKEY);
+        res.cookie('token', token);
+
         await new_user.save();
+
+        res.status(200).json({ message: "User Created Succefully" });
+
     } catch (error) {
-        res.status()
+        res.status(500).json({ message: "Internal Server Error", error });
     }
 }
