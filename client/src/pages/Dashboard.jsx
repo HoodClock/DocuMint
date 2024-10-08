@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { GridView, History, Settings, Logout, Info, AccountCircle, Notifications, AttachFile } from '@mui/icons-material';
+import { GridView, Notifications, ExitToApp, History, Settings, Logout, Info, AccountCircle, AttachFile } from '@mui/icons-material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CloseIcon from '@mui/icons-material/Close';
 import NftCollection from '../components/NftCollections'
@@ -10,6 +10,7 @@ function Dashboard() {
 
     const [activeTab, setActiveTab] = useState('NFT');
     const [activeUploadDocs, setActiveUploadDocs] = useState();
+    const [dropdownVisible, setDropdownVisible] = useState(false);
 
     const handleOpenModel = async () => {
         setActiveUploadDocs(true);
@@ -18,6 +19,8 @@ function Dashboard() {
     const handleCloseModel = async () => {
         setActiveUploadDocs(false);
     }
+
+
 
     return (
         <div className="flex min-h-screen bg-[#111318] text-white font-roboto">
@@ -62,14 +65,53 @@ function Dashboard() {
             <main className="flex-grow p-10 bg-[#111318] overflow-y-auto">
 
                 {/* Top Bar */}
-                <header className="flex justify-between items-center p-4 rounded-lg mb-6">
-                    <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-yellow-400 bg-clip-text text-transparent">Welcome, User!</h1>
-                    <div className="flex space-x-4 items-center">
-                        <Notifications className="hover:text-white" />
-                        <div className="w-20 h-20 rounded-full overflow-hidden flex items-center space-x-2">
+                <header className="flex justify-between items-center p-4 bg-gradient-to-r from-gray-900 via-black to-gray-800 rounded-lg mb-6">
+                    <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-yellow-400 bg-clip-text text-transparent">
+                        Welcome, User!
+                    </h1>
+                    <div className="flex space-x-4 items-center relative">
+                        {/* Notification Icon */}
+                        <Notifications className="hover:text-yellow-400 cursor-pointer text-white" />
+
+                        {/* Profile Icon and Dropdown */}
+                        <div
+                            className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center cursor-pointer relative border-2 border-white"
+                            onClick={() => setDropdownVisible(!dropdownVisible)}
+                        >
                             <img src="./Images/LOGO.png" alt="User" className="w-full h-full object-cover" />
                         </div>
 
+                        {/* Dropdown Box */}
+                        {dropdownVisible && (
+                            <div className="absolute top-20 right-0 bg-gray-800 text-white shadow-lg rounded-md p-4 w-64 z-50">
+                                {/* User Info */}
+                                <div className="flex items-center space-x-4 mb-4">
+                                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-green-400">
+                                        <img src="./Images/LOGO.png" alt="User" className="w-full h-full object-cover" />
+                                    </div>
+                                    <div>
+                                        <p className="text-lg font-semibold text-green-400">Username</p>
+                                        <p className="text-sm text-gray-400">user@example.com</p>
+                                    </div>
+                                </div>
+
+                                {/* Options */}
+                                <div className="flex flex-col space-y-2">
+                                    <button className="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded-md">
+                                        <AccountCircle className="text-blue-400" />
+                                        <span className="text-white">Profile</span>
+                                    </button>
+                                    <button className="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded-md">
+                                        <Settings className="text-yellow-400" />
+                                        <span className="text-white">Account Settings</span>
+                                    </button>
+                                    <button className="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded-md">
+                                        <ExitToApp className="text-red-400" />
+                                        <span className="text-white">Logout</span>
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </header>
 

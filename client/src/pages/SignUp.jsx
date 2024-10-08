@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 
@@ -8,6 +9,8 @@ function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [walletAddress, setWalletAddress] = useState('');
+
+    const navigate = useNavigate();
 
     const handleFormSubmission = async (e) => {
         e.preventDefault();
@@ -20,11 +23,14 @@ function SignUp() {
                 walletAddress: walletAddress
             }
 
-            const response = await axios.post("http://localhost:3000/api/auth/signup/user-registeration", formData, { withCredentials: true });
+            await axios.post("http://localhost:3000/api/auth/signup/user-registeration", formData, { withCredentials: true });
+
+            navigate('/dashboard');
 
         } catch (error) {
             console.log("Error in Axios", error);
         }
+
     }
 
     return (

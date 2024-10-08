@@ -8,6 +8,8 @@ const app = express();
 
 // ALL the Routes
 const signUpRouter = require("./routes/signIn.routes");
+const loginRouter = require('./routes/login.routes');
+const logoutRouter = require('./routes/logout.routes');
 
 // configuration of DotENV
 dotenv.config();
@@ -27,7 +29,7 @@ const corsOption = {
 // middlewares
 app.use(cors(corsOption));
 app.use(cookieParser());
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -35,8 +37,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // AUTH Endpoints
 app.use('/api/auth/signup', signUpRouter); // POST
-// app.use('/api/auth/login'); // POST
-// app.use('/api/auth/logout'); // GET
+app.use('/api/auth/login', loginRouter); // POST
+app.use('/api/auth/logout', logoutRouter); // GET
 // app.use('/api/user/profile'); // GET
 
 // // Document Management endpoint
@@ -54,12 +56,6 @@ app.use('/api/auth/signup', signUpRouter); // POST
 // app.use('/api/wallet/connect'); // POST
 // app.use('/api/wallet/status'); // GET
 
-
-// Error handling 
-app.use((err, req, res, next) => {
-    console.log(err.stack);
-    res.status(500).send("Something went worng");
-})
 
 // Listen to the Server
 app.listen(PORT, () => {

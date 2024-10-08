@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
-const userModel = require('../models/User.model')
+const userModel = require('../models/User.model');
 
 const auth = async (req, res, next) => {
     try {
         const token = req.cookies.token;
+        console.log("Token", token);
 
         if (!token) {
             return res.status(401).json({ message: "No token has been provided" });
