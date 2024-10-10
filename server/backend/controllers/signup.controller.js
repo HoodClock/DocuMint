@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 // Create Account✅
 // Login✅
-// Logout
+// Logout✅
 // Delete
 
 exports.signUp = async (req, res) => {
@@ -79,14 +79,6 @@ exports.login = async (req, res) => {
 }
 
 exports.logout = async (req, res) => {
-
-    const { userId } = req.params;
-
-    const existedUser = await userModel.findById(userId);
-
-    if (!existedUser) {
-        res.status(401).json({ message: "User does not exist" });
-    }
-
-
+    res.clearCookie('token');
+    res.status(200).json({ message: 'Logged out Successfully' });
 }
