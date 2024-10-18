@@ -18,8 +18,7 @@ const Login = () => {
                 password: password
             }
 
-            await axios.post('http://localhost:5173/api/auth/login/auth-user', formData, { withCredentials: true });
-
+            const response = await axios.post('http://localhost:3000/api/auth/login/auth-user', formData, { withCredentials: true });
             navigate('/dashboard');
 
         } catch (error) {

@@ -1,16 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GridView, Notifications, ExitToApp, History, Settings, Logout, Info, AccountCircle, AttachFile } from '@mui/icons-material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CloseIcon from '@mui/icons-material/Close';
 import NftCollection from '../components/NftCollections'
 import TxHistory from '../components/TxHistory'
 import Documentation from '../components/Documentation'
+import SideBar from '../components/SideBar';
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function Dashboard() {
 
     const [activeTab, setActiveTab] = useState('NFT');
     const [activeUploadDocs, setActiveUploadDocs] = useState();
     const [dropdownVisible, setDropdownVisible] = useState(false);
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const verifyUser = async () => {
+            try {
+                await axios.get('http://localhost:3000/api/user/visiting/dashboard', { withCredentials: true });
+            } catch (error) {
+                navigate('/login');
+            }
+        }
+
+        verifyUser();
+
+    }, [navigate]);
 
     const handleOpenModel = async () => {
         setActiveUploadDocs(true);
@@ -20,46 +38,37 @@ function Dashboard() {
         setActiveUploadDocs(false);
     }
 
+    const handleLogout = async () => {
+        try {
+            await axios.get('http://localhost:3000/api/auth/logout/Signing-out/', {
+                withCredentials: true
+            });
 
+
+            navigate('/');
+
+        } catch (error) {
+            console.log("Axios Error Occuring", error);
+        }
+
+    }
+
+    const handleProfile = async () => {
+        try {
+            await axios.get('http://localhost:3000/api/user/profile/user-persona', { withCredentials: true });
+
+            navigate('/profile');
+
+        } catch (error) {
+            console.log("Axios Error Occuring", error);
+        }
+    }
 
     return (
         <div className="flex min-h-screen bg-[#111318] text-white font-roboto">
 
-            {/* Sidebar */}
-            <aside className="w-64 bg-[#111318] p-5 flex flex-col justify-between">
-                {/* Sidebar Top */}
-                <div>
-                    <div className="text-3xl text-white font-bold mb-10 tracking-wider">
-                        DocuMint
-                    </div>
-                    <nav>
-                        <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-yellow-300 transition-all duration-200">
-                            <GridView className="text-white" />
-                            <span>Dashboard</span>
-                        </div>
-                        <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-yellow-400 transition-all duration-200">
-                            <AccountCircle className="text-white" />
-                            <span>Profile</span>
-                        </div>
-                        <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-yellow-400 transition-all duration-200">
-                            <History className="text-white" />
-                            <span>Transaction History</span>
-                        </div>
-                    </nav>
-                </div>
-
-                {/* Sidebar Bottom */}
-                <div>
-                    <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-white transition-all duration-200">
-                        <Settings className="text-white" />
-                        <span>Settings</span>
-                    </div>
-                    <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-white transition-all duration-200">
-                        <Info className="text-white" />
-                        <span>About</span>
-                    </div>
-                </div>
-            </aside>
+            {/* Side Bar */}
+            <SideBar />
 
             {/* Main Content Area */}
             <main className="flex-grow p-10 bg-[#111318] overflow-y-auto">
@@ -97,7 +106,7 @@ function Dashboard() {
 
                                 {/* Options */}
                                 <div className="flex flex-col space-y-2">
-                                    <button className="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded-md">
+                                    <button onClick={handleProfile} className="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded-md">
                                         <AccountCircle className="text-blue-400" />
                                         <span className="text-white">Profile</span>
                                     </button>
@@ -105,7 +114,7 @@ function Dashboard() {
                                         <Settings className="text-yellow-400" />
                                         <span className="text-white">Account Settings</span>
                                     </button>
-                                    <button className="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded-md">
+                                    <button onClick={handleLogout} className="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded-md">
                                         <ExitToApp className="text-red-400" />
                                         <span className="text-white">Logout</span>
                                     </button>

@@ -22,16 +22,12 @@ exports.signUp = async (req, res) => {
         });
 
         const token = jwt.sign({ id: new_user._id }, process.env.JWTSECRETKEY, {
-            expiresIn: process.env.JWTEXPIRES || '1h',
+            expiresIn: process.env.JWTEXPIRES || '2h',
         });
 
-        console.log('first milestone')
+        res.cookie('token', token);
 
-        res.cookie('token', token, { httpOnly: true });
-
-        console.log('second milestone')
-
-        res.status(200).json({ message: "User Created Succefully" });
+        res.status(201).json({ message: "User Created Succefully" });
 
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error", error });
@@ -40,7 +36,6 @@ exports.signUp = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-        console.log('second milestone')
 
         const { username, password } = req.body;
 
@@ -51,7 +46,7 @@ exports.login = async (req, res) => {
         const existedUser = await userModel.findOne({ username });
 
         if (!existedUser) {
-            res.status(400).json({ message: "User does not exist" });
+            res.status(400).json({ message: `User with the ${username} username does not exist` });
         }
 
         const checkPassword = await existedUser.matchPassword(password);
@@ -60,16 +55,11 @@ exports.login = async (req, res) => {
             res.status(400).json({ message: "Password is incorrect" });
         }
 
-        console.log("Milestone passed")
+        const token = jwt.sign({ id: existedUser._id }, "OlaAmigos", {
+            expiresIn: "1h",
+        });
 
-        const token = jwt.sign({ id: new_user._id }, process.env.JWTSECRETKEY, {
-            expiresIn: process.env.JWTEXPIRES || '1h'
-        })
-
-        console.log('first milestone')
-
-        res.cookie('token', token, { httpOnly: true, });
-        console.log('second milestone')
+        res.cookie('token', token);
 
         res.status(201).json({ message: "User LoggedIn sucessfully" });
 
@@ -79,6 +69,12 @@ exports.login = async (req, res) => {
 }
 
 exports.logout = async (req, res) => {
-    res.clearCookie('token');
-    res.status(200).json({ message: 'Logged out Successfully' });
+    try {
+        res.clearCookie('token');
+
+        res.status(200).json({ message: 'Logged out Successfully' });
+
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error });
+    }
 }
