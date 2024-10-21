@@ -14,13 +14,17 @@ function Dashboard() {
     const [activeTab, setActiveTab] = useState('NFT');
     const [activeUploadDocs, setActiveUploadDocs] = useState();
     const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [userData, setUserData] = useState(null);
     const navigate = useNavigate();
 
 
     useEffect(() => {
         const verifyUser = async () => {
             try {
-                await axios.get('http://localhost:3000/api/user/visiting/dashboard', { withCredentials: true });
+                const response = await axios.get('http://localhost:3000/api/user/visiting/dashboard', { withCredentials: true });
+
+                setUserData(response.data);
+
             } catch (error) {
                 navigate('/login');
             }
@@ -55,7 +59,9 @@ function Dashboard() {
 
     const handleProfile = async () => {
         try {
-            await axios.get('http://localhost:3000/api/user/profile/user-persona', { withCredentials: true });
+            const response = await axios.get('http://localhost:3000/api/user/profile/user-persona', { withCredentials: true });
+
+            setUserData(response.data);
 
             navigate('/profile');
 
@@ -76,7 +82,7 @@ function Dashboard() {
                 {/* Top Bar */}
                 <header className="flex justify-between items-center p-4 bg-gradient-to-r from-gray-900 via-black to-gray-800 rounded-lg mb-6">
                     <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-yellow-400 bg-clip-text text-transparent">
-                        Welcome, User!
+                        Welcome, {userData?.username || "loading"}
                     </h1>
                     <div className="flex space-x-4 items-center relative">
                         {/* Notification Icon */}
@@ -99,8 +105,8 @@ function Dashboard() {
                                         <img src="./Images/LOGO.png" alt="User" className="w-full h-full object-cover" />
                                     </div>
                                     <div>
-                                        <p className="text-lg font-semibold text-green-400">Username</p>
-                                        <p className="text-sm text-gray-400">user@example.com</p>
+                                        <p className="text-lg font-semibold text-green-400">{userData?.username || "Loading..."}</p>
+                                        <p className="text-sm text-gray-400">{userData?.email || "Loading..."}</p>
                                     </div>
                                 </div>
 

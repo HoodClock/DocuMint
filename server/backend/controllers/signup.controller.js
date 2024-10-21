@@ -14,11 +14,16 @@ exports.signUp = async (req, res) => {
             res.status(401).json({ message: "User Credentials are missing" });
         }
 
+        // Generating Avatar
+        const avatar = createAvatar(style, {
+            seed: username,
+        })
+
         const new_user = await userModel.create({
             username,
             email,
             password,
-            walletAddress
+            walletAddress,
         });
 
         const token = jwt.sign({ id: new_user._id }, process.env.JWTSECRETKEY, {

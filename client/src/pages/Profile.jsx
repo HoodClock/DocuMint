@@ -1,7 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SideBar from '../components/SideBar'
+import axios from 'axios';
 
 function Profile() {
+
+    const [userData, setUserData] = useState(null);
+
+    useEffect(() => {
+        const profileRequest = async () => {
+            const response = await axios.get('http://localhost:3000/api/user/profile/user-persona', { withCredentials: true });
+            setUserData(response.data);
+
+        }
+
+        profileRequest();
+
+    }, []);
+
     return (
         <div className="flex min-h-screen bg-[#111318] text-white">
             {/* Sidebar */}
@@ -24,11 +39,11 @@ function Profile() {
                         />
 
                         {/* User Name */}
-                        <div className="text-xl font-bold mt-4">Beni Smith</div>
+                        <div className="text-xl font-bold mt-4">{userData?.username || "Loading..."}</div>
 
                         {/* Buttons */}
                         <div className="mt-4">
-                           <h2 className='font-bold hover:text-[#5bcfcd] hover: cursor-pointer'>Example@123.com</h2>
+                            <h2 className='font-bold hover:text-[#5bcfcd] hover: cursor-pointer'>{userData?.email || "Loading..."}</h2>
                         </div>
                     </div>
 

@@ -3,7 +3,11 @@ const router = express.Router();
 const auth_middleWare = require('../middleware/auth.middleware');
 
 router.get('/dashboard', auth_middleWare, (req, res) => {
-    res.status(200).json({ message: "HEY Welcome to dashboard" });
+    if (req.user) {
+        res.status(200).json(req.user);
+    } else {
+        res.status(401).json({ message: "User is not Authenticated" });
+    }
 });
 
 module.exports = router;
