@@ -5,13 +5,17 @@ const documentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: false
+    },
+    docType: {
+        type: String,
+        required: true
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
-    },
-    ipfsHash: {
-        type: String,
         required: true
     },
     status: {
@@ -19,7 +23,7 @@ const documentSchema = new mongoose.Schema({
         default: "Uploaded"
     },
     nftMinted: {
-        type: Boolean,
+        type: Boolean, // Minted, not yet Minted
         default: false
     }
 }, { timestamps: true });

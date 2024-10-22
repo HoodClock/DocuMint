@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { GridView, Notifications, ExitToApp, History, Settings, Logout, Info, AccountCircle, AttachFile } from '@mui/icons-material';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
-import CloseIcon from '@mui/icons-material/Close';
 import NftCollection from '../components/NftCollections'
 import TxHistory from '../components/TxHistory'
 import Documentation from '../components/Documentation'
 import SideBar from '../components/SideBar';
+import UploadDocs from '../components/UploadDocs';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 function Dashboard() {
 
     const [activeTab, setActiveTab] = useState('NFT');
-    const [activeUploadDocs, setActiveUploadDocs] = useState();
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [userData, setUserData] = useState(null);
     const navigate = useNavigate();
@@ -34,13 +32,7 @@ function Dashboard() {
 
     }, [navigate]);
 
-    const handleOpenModel = async () => {
-        setActiveUploadDocs(true);
-    }
 
-    const handleCloseModel = async () => {
-        setActiveUploadDocs(false);
-    }
 
     const handleLogout = async () => {
         try {
@@ -81,7 +73,7 @@ function Dashboard() {
 
                 {/* Top Bar */}
                 <header className="flex justify-between items-center p-4 bg-gradient-to-r from-gray-900 via-black to-gray-800 rounded-lg mb-6">
-                    <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-yellow-400 bg-clip-text text-transparent">
+                    <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-500 to-purple-600 bg-clip-text text-transparent">
                         Welcome, {userData?.username || "loading"}
                     </h1>
                     <div className="flex space-x-4 items-center relative">
@@ -133,75 +125,9 @@ function Dashboard() {
                 {/* Hero Section - Upload Document Box */}
                 <div className="flex flex-wrap justify-center items-center h-screen space-x-8"> {/* Flex container for side-by-side layout */}
 
-                    {/* Container Box with Upload Icon and Text */}
-                    <div
-                        className="bg-[#000000] p-10 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
-                        onClick={handleOpenModel} // Open modal on click
-                    >
-                        <UploadFileIcon style={{ color: '#DBFD2D', fontSize: '5rem' }} />
-                        <p className="mt-4 text-white font-bold text-center text-lg">Click to upload your document!</p>
-                    </div>
+                    {/* Upload Section */}
+                    <UploadDocs />
 
-                    {/* Modal for Upload Details */}
-                    {activeUploadDocs && (
-                        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center">
-                            <div className="bg-[#141721] p-10 rounded-lg shadow-lg w-full max-w-lg relative">
-                                {/* Close Button */}
-                                <button
-                                    className="absolute top-2 right-2 text-[#DBFD2D] hover:text-[#8FFD2D] transition-colors"
-                                    onClick={handleCloseModel} // Close modal on click
-                                >
-                                    <CloseIcon />
-                                </button>
-
-                                <h2 className="text-2xl font-bold text-[#DBFD2D] mb-6 text-center">Upload Document Details</h2>
-
-                                {/* Input Fields */}
-                                <div className="mb-4">
-                                    <label htmlFor="docName" className="block text-[#ffffff] mb-2 font-bold">Document Name</label>
-                                    <input
-                                        id="docName"
-                                        type="text"
-                                        className="w-full p-3 rounded bg-[#000000] text-[#ffffff] focus:border-[#8FFD2D] transition-colors"
-                                        placeholder="Enter Document Name"
-                                    />
-                                </div>
-
-                                <div className="mb-4">
-                                    <label htmlFor="docDesc" className="block text-[#ffffff] mb-2 font-bold">Document Description (Optional)</label>
-                                    <textarea
-                                        id="docDesc"
-                                        rows="3"
-                                        className="w-full p-3 rounded bg-[#000000] text-[#ffffff] transition-colors"
-                                        placeholder="Enter a short description"
-                                    />
-                                </div>
-
-                                <div className="mb-6">
-                                    <label htmlFor="documentType" className="block text-[#f9f9f9] mb-2 font-bold">Select Document Type</label>
-                                    <select
-                                        id="documentType"
-                                        className="w-full p-3 rounded bg-[#000000] text-[#ededed] transition-colors"
-                                    >
-                                        <option className="bg-black text-[#DBFD2D]">Legal</option>
-                                        <option className="bg-black text-[#DBFD2D]">Personal</option>
-                                        <option className="bg-black text-[#DBFD2D]">Official</option>
-                                        <option className="bg-black text-[#DBFD2D]">Educational</option>
-                                    </select>
-                                </div>
-
-                                {/* Transform Button */}
-                                <div className="mt-8 flex justify-center">
-                                    <button
-                                        className="bg-[#DBFD2D] text-black py-3 w-full shadow-lg rounded-full hover:bg-[#eeee47] transition-all duration-600 font-bold"
-                                        onClick={() => alert('Transform to NFT')} // Placeholder for transform action
-                                    >
-                                        Transform to NFT
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
 
                     {/* Right: Recent Activity Box */}
                     <section className="bg-[#000000] p-6 rounded-lg mb-10 shadow-lg border-b-[#141721] flex-grow">

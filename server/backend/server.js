@@ -12,6 +12,7 @@ const loginRouter = require('./routes/login.routes');
 const logoutRouter = require('./routes/logout.routes');
 const dashboardRouter = require('./routes/dashboard.routes');
 const profileRouter = require('./routes/profile.routes');
+const UploadDocumentRouter = require('./routes/uploadDocument.routes');
 
 // configuration of DotENV
 dotenv.config();
@@ -42,7 +43,8 @@ app.use('/api/user/profile', profileRouter); // GET
 
 
 // // Document Management endpoint
-// app.use('/api/documents/upload'); // POST
+app.use('/api/documents/upload', UploadDocumentRouter); // POST
+// app.use('/api/documents/allDocuments') // GET
 
 // // NFT creation and management
 // app.use('/api/nfts/create'); // POST
