@@ -13,10 +13,13 @@ const documentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    user: {
+    owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    IPFSHash: {
+        type: String,
     },
     status: {
         type: String, // Uploaded, Verified, Minted
