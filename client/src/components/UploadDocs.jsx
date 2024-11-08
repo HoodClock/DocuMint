@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CloseIcon from '@mui/icons-material/Close';
-
+import axios from 'axios';
 
 function UploadDocs() {
 
     const [activeUploadDocs, setActiveUploadDocs] = useState();
+
+    const [docName, setDocname] = useState('');
+    const [docDesc, setDocDesc] = useState('');
+    const [docType, setDocType] = useState('');
+    const [docFile, setDocFile] = useState('');
 
 
     const handleOpenModel = async () => {
@@ -16,8 +21,26 @@ function UploadDocs() {
         setActiveUploadDocs(false);
     }
 
-    const handleUploadDocument = async (req, res) => {
-        console.log("Hello from Upload Document");
+    const handleUploadDocument = async (e) => {
+        try {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append('docName', docName);
+            formData.append('docDesc', docDesc);
+            formData.append('docType', docType);
+            formData.append('document', docFile);
+
+
+            const response = await axios.post('http://localhost:3000/api/documents/upload/upload-document', formData,
+                {
+                    withCredentials: true,
+                    // headers: { 'Content-Type': 'multipart/form-data' }
+                });
+
+        } catch (error) {
+            console.error('Error during document upload', error);
+        }
     }
 
     return (
@@ -47,62 +70,70 @@ function UploadDocs() {
                                 Upload Document Details
                             </h2>
 
-                            {/* Input Fields */}
-                            <div className="mb-4">
-                                <label htmlFor="docName" className="block text-[#ffffff] mb-2 font-bold">Document Name</label>
-                                <input
-                                    id="docName"
-                                    name='docName'
-                                    type="text"
-                                    className="w-full p-3 rounded bg-[#000000] text-[#ffffff] focus:border-[#8FFD2D] transition-colors"
-                                    placeholder="Enter Document Name"
-                                />
-                            </div>
+                            <form onSubmit={handleUploadDocument}>
+                                {/* Input Fields */}
+                                <div className="mb-4">
+                                    <label htmlFor="docName" className="block text-[#ffffff] mb-2 font-bold">Document Name</label>
+                                    <input
+                                        id="docName"
+                                        name='docName'
+                                        onChange={(e) => setDocname(e.target.value)}
+                                        type="text"
+                                        className="w-full p-3 rounded bg-[#000000] text-[#ffffff] focus:border-[#8FFD2D] transition-colors"
+                                        placeholder="Enter Document Name"
+                                    />
+                                </div>
 
-                            <div className="mb-4">
-                                <label htmlFor="docDesc" className="block text-[#ffffff] mb-2 font-bold">Document Description (Optional)</label>
-                                <textarea
-                                    id="docDesc"
-                                    name='docDesc'
-                                    rows="3"
-                                    className="w-full p-3 rounded bg-[#000000] text-[#ffffff] transition-colors"
-                                    placeholder="Enter a short description"
-                                />
-                            </div>
+                                <div className="mb-4">
+                                    <label htmlFor="docDesc" className="block text-[#ffffff] mb-2 font-bold">Document Description (Optional)</label>
+                                    <textarea
+                                        id="docDesc"
+                                        name='docDesc'
+                                        onChange={(e) => setDocDesc(e.target.value)}
+                                        rows="3"
+                                        className="w-full p-3 rounded bg-[#000000] text-[#ffffff] transition-colors"
+                                        placeholder="Enter a short description"
+                                    />
+                                </div>
 
-                            <div className="mb-4">
-                                <label htmlFor="documentFile" className="block text-[#ffffff] mb-2 font-bold">Upload Document</label>
-                                <input
-                                    id="documentFile"
-                                    type="file"
-                                    className="w-full p-3 rounded bg-[#000000] text-[#ffffff] transition-colors"
-                                    accept=".pdf, .doc, .docx, .png, .jpg, .jpeg" // Adjust accepted file types as needed
-                                />
-                            </div>
+                                <div className="mb-4">
+                                    <label htmlFor="documentFile" className="block text-[#ffffff] mb-2 font-bold">Upload Document</label>
+                                    <input
+                                        id="documentFile"
+                                        name='docFile'
+                                        type="file"
+                                        onChange={(e) => setDocFile(e.target.files[0])}
+                                        className="w-full p-3 rounded bg-[#000000] text-[#ffffff] transition-colors"
+                                        accept=".pdf, .doc, .docx, .png, .jpg, .jpeg" // LATER Change this also👿
+                                    />
+                                </div>
 
-                            <div className="mb-6">
-                                <label htmlFor="documentType" className="block text-[#f9f9f9] mb-2 font-bold">Select Document Type</label>
-                                <select
-                                    id="documentType"
-                                    name='documentType'
-                                    className="w-full p-3 rounded bg-[#000000] text-[#ededed] transition-colors"
-                                >
-                                    <option className="bg-black text-[#aa73fb] font-semibold">Legal</option>
-                                    <option className="bg-black text-[#aa73fb] font-semibold">Personal</option>
-                                    <option className="bg-black text-[#aa73fb] font-semibold">Official</option>
-                                    <option className="bg-black text-[#aa73fb] font-semibold">Educational</option>
-                                </select>
-                            </div>
+                                <div className="mb-6">
+                                    <label htmlFor="documentType" className="block text-[#f9f9f9] mb-2 font-bold">Select Document Type</label>
+                                    <select
+                                        id="documentType"
+                                        name='documentType'
+                                        onChange={(e) => setDocType(e.target.value)}
+                                        className="w-full p-3 rounded bg-[#000000] text-[#ededed] transition-colors"
+                                    >
+                                        <option className="bg-black text-[#aa73fb] font-semibold">Legal</option>
+                                        <option className="bg-black text-[#aa73fb] font-semibold">Personal</option>
+                                        <option className="bg-black text-[#aa73fb] font-semibold">Official</option>
+                                        <option className="bg-black text-[#aa73fb] font-semibold">Educational</option>
+                                    </select>
+                                </div>
 
-                            {/* Upload Button */}
-                            <div className="mt-8 flex justify-center">
-                                <button
-                                    className="bg-gradient-to-r from-yellow-500 to-purple-600 text-white py-3 w-full shadow-lg rounded-full hover:bg-[#eeee47] transition-all duration-600 font-bold"
-                                    onClick={() => handleUploadDocument()} // Function to handle document upload
-                                >
-                                    Upload Your Document
-                                </button>
-                            </div>
+                                {/* Upload Button */}
+                                <div className="mt-8 flex justify-center">
+                                    <button
+
+                                        className="bg-gradient-to-r from-yellow-500 to-purple-600 text-white py-3 w-full shadow-lg rounded-full hover:bg-[#eeee47] transition-all duration-600 font-bold"
+                                        type='submit'
+                                    >
+                                        Upload Your Document
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 )
