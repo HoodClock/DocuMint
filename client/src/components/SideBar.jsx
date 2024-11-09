@@ -1,5 +1,6 @@
 import React from 'react'
-import {GridView, AccountCircle, History, Settings, Info} from "@mui/icons-material"
+import { GridView, History, Settings, Info, Inventory } from "@mui/icons-material"
+
 
 function SideBar() {
     return (
@@ -14,11 +15,11 @@ function SideBar() {
                     <nav>
                         <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-yellow-300 transition-all duration-200">
                             <GridView className="text-white" />
-                            <span>Dashboard</span>
+                            <span><a href="/dashboard">Dashboard</a></span>
                         </div>
                         <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-yellow-400 transition-all duration-200">
-                            <AccountCircle className="text-white" />
-                            <span>Profile</span>
+                            <Inventory className="text-white" />
+                            <span>Archive</span>
                         </div>
                         <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-yellow-400 transition-all duration-200">
                             <History className="text-white" />

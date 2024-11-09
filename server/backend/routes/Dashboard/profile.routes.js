@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const auth_middleware = require('../middleware/auth.middleware');
+const auth_middleware = require('../../middleware/auth.middleware');
 
 router.get('/user-persona', auth_middleware, (req, res) => {
     if (req.user) {

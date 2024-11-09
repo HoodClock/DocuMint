@@ -1,9 +1,10 @@
 const documentModel = require('../models/Document.model');
+const userModel = require('../models/User.model');
 const pinataSDK = require('@pinata/sdk');
 const { Readable } = require('stream');
 
 // Upload Docs POST ✅
-// Get ALL Docs of the User❌
+// Get ALL Docs of the User✅
 
 exports.upload = async (req, res) => {
     try {
@@ -48,6 +49,8 @@ exports.upload = async (req, res) => {
             owner: req.user._id
         });
 
+        await userModel.findByIdAndUpdate(req.user._id, { $push: { documents: newDocument._id } });
+
         return res.status(201).json({ message: "Document uploaded successfully", document: newDocument });
 
     } catch (error) {
@@ -57,5 +60,12 @@ exports.upload = async (req, res) => {
 }
 
 exports.getAllDocuments = async (req, res) => {
+    try {
 
+        const documents = await documentModel.find({});
+
+        res.status(200).json({ success: true, data: documents });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
 }

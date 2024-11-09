@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { GridView, Notifications, ExitToApp, History, Settings, Logout, Info, AccountCircle, AttachFile } from '@mui/icons-material';
+import {Settings, Notifications, ExitToApp, History, Logout, Info, AccountCircle} from '@mui/icons-material';
 import NftCollection from '../components/NftCollections'
 import TxHistory from '../components/TxHistory'
 import Documentation from '../components/Documentation'
 import SideBar from '../components/SideBar';
 import UploadDocs from '../components/UploadDocs';
+import RecentActivity from '../components/RecentActivity'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
@@ -129,41 +130,8 @@ function Dashboard() {
                     <UploadDocs />
 
 
-                    {/* Right: Recent Activity Box */}
-                    <section className="bg-[#000000] p-6 rounded-lg mb-10 shadow-lg border-b-[#141721] flex-grow">
-                        <h2 className="text-2xl font-bold text-white mb-4 tracking-wide">Recent Activity</h2>
-
-                        <table className="min-w-full rounded-lg">
-                            <thead>
-                                <tr>
-                                    <th className="text-left p-4 text-gray-300">Document Name</th>
-                                    <th className="text-left p-4 text-gray-300">Created On</th>
-                                    <th className="text-left p-4 text-gray-300">Status</th>
-                                </tr>
-                                <tr>
-                                    <td colSpan="3" className="border-b-2 border-zinc-100" />
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr className="border-b border-gray-700">
-                                    <td className="p-4 text-gray-200 flex items-center">
-                                        <AttachFile className="w-6 h-6" titleAccess="Attachment" />
-                                        Document1.pdf
-                                    </td>
-                                    <td className="p-4 text-gray-400">User1<br />2024-09-28</td>
-                                    <td className="p-4 text-yellow-400">Uploaded</td>
-                                </tr>
-                                <tr className="border-b border-gray-700">
-                                    <td className="p-4 text-gray-200 flex items-center">
-                                        <AttachFile className="w-6 h-6" titleAccess="Attachment" />
-                                        Document2.docx
-                                    </td>
-                                    <td className="p-4 text-gray-400">User2<br />2024-09-27</td>
-                                    <td className="p-4 text-green-400">Verified</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </section>
+                 {/* RECENT ACITVITY SECTION */}
+                    <RecentActivity />
                 </div>
 
                 {/* Tabs for Navigation */}

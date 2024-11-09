@@ -10,7 +10,6 @@ function Profile() {
         const profileRequest = async () => {
             const response = await axios.get('http://localhost:3000/api/user/profile/user-persona', { withCredentials: true });
             setUserData(response.data);
-
         }
 
         profileRequest();
@@ -71,7 +70,7 @@ function Profile() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-lg font-bold">Documents Uploaded: <span className="font-bold text-green-300 ">12</span></p>
+                                    <p className="text-lg font-bold">Documents Uploaded: <span className="font-bold text-green-300 ">{userData?.documents.length}</span></p>
                                 </div>
                             </div>
 

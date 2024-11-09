@@ -7,13 +7,13 @@ const connectDB = require('./config/db')
 
 
 // ALL the Routes
-const signUpRouter = require("./routes/signIn.routes");
-const loginRouter = require('./routes/login.routes');
-const logoutRouter = require('./routes/logout.routes');
-const dashboardRouter = require('./routes/dashboard.routes');
-const profileRouter = require('./routes/profile.routes');
-const UploadDocumentRouter = require('./routes/uploadDocument.routes');
-const getAllUserDocument = require('./routes/getAllDocuments.routes');
+const signUpRouter = require("./routes/Registration/signIn.routes");
+const loginRouter = require('./routes/Registration/login.routes');
+const logoutRouter = require('./routes/Registration/logout.routes');
+const dashboardRouter = require('./routes/Dashboard/dashboard.routes');
+const profileRouter = require('./routes/Dashboard/profile.routes');
+const UploadDocumentRouter = require('./routes/Documents/uploadDocument.routes');
+const getAllUserDocument = require('./routes/Documents/getAllDocuments.routes');
 
 // configuration of DotENV
 dotenv.config();
