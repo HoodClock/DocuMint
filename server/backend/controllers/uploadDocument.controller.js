@@ -15,9 +15,9 @@ exports.upload = async (req, res) => {
         // access the file that was upload
         const file = req.file;
 
-        if (!docName || !docDesc || !docType || !file) {
-            return res.status(401).json({ message: "Document Credentials are missing." });
-        }
+        // if (!docName || !docDesc || !docType || !file) {
+        //     return res.status(401).json({ message: "Document Credentials are missing." });
+        // }
 
         // initialize Pinata
         const pinata = new pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_API_SECRET);

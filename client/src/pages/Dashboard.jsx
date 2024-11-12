@@ -4,7 +4,7 @@ import NftCollection from '../components/NftCollections'
 import TxHistory from '../components/TxHistory'
 import Documentation from '../components/Documentation'
 import SideBar from '../components/SideBar';
-import UploadDocs from '../components/UploadDocs';
+import UploadCard from '../components/UploadCard'
 import RecentActivity from '../components/RecentActivity'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -127,7 +127,7 @@ function Dashboard() {
                 <div className="flex flex-wrap justify-center items-center h-screen space-x-8"> {/* Flex container for side-by-side layout */}
 
                     {/* Upload Section */}
-                    <UploadDocs />
+                    <UploadCard />
 
 
                  {/* RECENT ACITVITY SECTION */}

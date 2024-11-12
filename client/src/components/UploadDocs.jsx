@@ -3,7 +3,7 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 
-function UploadDocs() {
+function UploadDocs({ onUploadComplete }) {
 
     const [activeUploadDocs, setActiveUploadDocs] = useState();
 
@@ -11,7 +11,6 @@ function UploadDocs() {
     const [docDesc, setDocDesc] = useState('');
     const [docType, setDocType] = useState('');
     const [docFile, setDocFile] = useState('');
-
 
     const handleOpenModel = async () => {
         setActiveUploadDocs(true);
@@ -32,11 +31,13 @@ function UploadDocs() {
             formData.append('document', docFile);
 
 
-            const response = await axios.post('http://localhost:3000/api/documents/upload/upload-document', formData,
+            await axios.post('http://localhost:3000/api/documents/upload/upload-document', formData,
                 {
                     withCredentials: true,
                     // headers: { 'Content-Type': 'multipart/form-data' }
                 });
+
+            onUploadComplete();
 
         } catch (error) {
             console.error('Error during document upload', error);
