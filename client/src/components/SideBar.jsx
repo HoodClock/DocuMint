@@ -19,7 +19,7 @@ function SideBar() {
                         </div>
                         <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-yellow-400 transition-all duration-200">
                             <Inventory className="text-white" />
-                            <span>Archive</span>
+                            <span><a href="/archive">Archive</a></span>
                         </div>
                         <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-yellow-400 transition-all duration-200">
                             <History className="text-white" />
