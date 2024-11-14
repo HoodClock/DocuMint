@@ -10,7 +10,8 @@ function RecentActivity() {
 
             const getDocuments = async () => {
                 const response = await axios.get('http://localhost:3000/api/documents/allDocuments/fetched-documents');
-                setData(response.data.data.slice(-2));
+                let DocsCollectionLength = response.data.data.length - 2
+                setData(response.data.data.slice(DocsCollectionLength));
             }
 
             getDocuments();
