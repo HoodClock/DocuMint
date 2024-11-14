@@ -10,7 +10,7 @@ function RecentActivity() {
 
             const getDocuments = async () => {
                 const response = await axios.get('http://localhost:3000/api/documents/allDocuments/fetched-documents');
-                setData(response.data.data);
+                setData(response.data.data.slice(-2));
             }
 
             getDocuments();
