@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/db')
 
-
 // ALL the Routes
 const signUpRouter = require("./routes/Registration/signIn.routes");
 const loginRouter = require('./routes/Registration/login.routes');

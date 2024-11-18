@@ -2,8 +2,19 @@ const documentModel = require('../models/Document.model');
 const userModel = require('../models/User.model');
 const { contract } = require('../helpers/contractHelper');
 
+// Create the NFT❌
+// Get All the NFT❌
+// Get the sepecific NFT❌
+
+
+
 exports.mintNFT = async (req, res) => {
-    const userId = req.user._id;
+
+    const userId = req.params.userId;
+
+    const user = await userModel.findById(userId);
+
+    // NEED TO GET THE DOCUMENT ID WHICH IS JUST UPLOADED YET.
 
     const document = await documentModel.findById(req.body.documentId);
 
@@ -12,9 +23,6 @@ exports.mintNFT = async (req, res) => {
     }
 
     const metaData = document.IPFSHash;
-
-    const user = await userModel.findById(userId);
-
 
     const transaction = await contract.mintDocument(user.walletAddress, metaData);
     await transaction.wait();
