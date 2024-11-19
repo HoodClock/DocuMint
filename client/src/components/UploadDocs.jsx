@@ -30,11 +30,12 @@ function UploadDocs({ onUploadComplete }) {
             formData.append('docType', docType);
             formData.append('document', docFile);
 
+            console.log("DocType", docType);
+
 
             await axios.post('http://localhost:3000/api/documents/upload/upload-document', formData,
                 {
                     withCredentials: true,
-                    // headers: { 'Content-Type': 'multipart/form-data' }
                 });
 
             onUploadComplete();
@@ -100,7 +101,7 @@ function UploadDocs({ onUploadComplete }) {
                                 <div className="mb-4">
                                     <label htmlFor="documentFile" className="block text-[#ffffff] mb-2 font-bold">Upload Document</label>
                                     <input
-                                        id="documentFile"
+                                        id="docFile"
                                         name='docFile'
                                         type="file"
                                         onChange={(e) => setDocFile(e.target.files[0])}
@@ -112,11 +113,12 @@ function UploadDocs({ onUploadComplete }) {
                                 <div className="mb-6">
                                     <label htmlFor="documentType" className="block text-[#f9f9f9] mb-2 font-bold">Select Document Type</label>
                                     <select
-                                        id="documentType"
-                                        name='documentType'
+                                        id="docType"
+                                        name='docType'
                                         onChange={(e) => setDocType(e.target.value)}
                                         className="w-full p-3 rounded bg-[#000000] text-[#ededed] transition-colors"
                                     >
+                                        👿 NEED TO FIX THE LEGAL OPTION 👿
                                         <option className="bg-black text-[#aa73fb] font-semibold">Legal</option>
                                         <option className="bg-black text-[#aa73fb] font-semibold">Personal</option>
                                         <option className="bg-black text-[#aa73fb] font-semibold">Official</option>
