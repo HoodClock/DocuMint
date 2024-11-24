@@ -11,11 +11,18 @@ exports.mintNFT = async (req, res) => {
     try {
         const userId = req.params.userId;
 
+        console.log("USER ID", userId);
+
         const user = await userModel.findById(userId);
+
+        console.log("User", user);
 
         // NEED TO GET THE DOCUMENT ID WHICH IS JUST UPLOADED YET.
 
         const lastDocument = await documentModel.findOne().sort({ createdAt: -1 });
+
+        console.log("LAST DOCUMENT", lastDocument);
+
 
         if (!lastDocument) {
             return res.status(404).json({ message: "Document not found" });
@@ -23,7 +30,7 @@ exports.mintNFT = async (req, res) => {
 
         const metaData = lastDocument.IPFSHash;
 
-        const transaction = await get_Contract_with_User(req, res, user.walletAddress, metaData);
+        const transaction = await get_Contract_with_User(req, res, user.walletAddress, metaData, user);
         await transaction.wait();
 
         lastDocument.status = 'Minted';

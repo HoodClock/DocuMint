@@ -24,9 +24,7 @@ contract DocumentNFT is ERC721 {
     }
 
     // Get_Minted_NFT
-    function getTokenMetaData(
-        uint256 tokenId
-    ) external view returns (string memory) {
+    function getTokenMetaData(uint256 tokenId) external view returns (string memory) {
         return _tokenMetaData[tokenId]; // fetched metadata according to tokenID
     }
 }

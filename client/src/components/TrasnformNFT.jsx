@@ -8,6 +8,7 @@ function TrasnformNFT() {
 
     const decodedToken = jwtDecode(token);
     const userId = decodedToken.id;
+    console.log("USER-ID", userId);
 
     const handle_Trasnform_NFT = async () => {
         try {

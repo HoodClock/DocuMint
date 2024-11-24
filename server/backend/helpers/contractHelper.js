@@ -3,12 +3,8 @@ const { contractAddress, contractABI } = require("../../Blockchain/config");
 
 const porvider = new JsonRpcProvider('http://127.0.0.1:8545');
 
-const get_Contract_with_User = async (req, res, walletAddress, metaData) => {
+const get_Contract_with_User = async (req, res, walletAddress, metaData, user) => {
     try {
-        // accessing the user from the auth_middlware
-        const user = req.user;
-
-        console.log("USER:", user);
 
         if (!user || !walletAddress) {
             return res.status(404).json({ message: "User or Wallet Address not found" });
@@ -27,7 +23,7 @@ const get_Contract_with_User = async (req, res, walletAddress, metaData) => {
         return transaction;
 
     } catch (error) {
-        res.status(500).json({ message: "Error setting up Contrat", error });
+        throw new Error("Error setting up Contrat", error);
     }
 }
 
