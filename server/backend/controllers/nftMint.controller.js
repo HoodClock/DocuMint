@@ -2,6 +2,8 @@ const documentModel = require('../models/Document.model');
 const userModel = require('../models/User.model');
 const { get_Contract_with_User } = require('../helpers/contractHelper');
 
+// NEED INTEGRATE THE WALLET (META MASK);
+
 // Create the NFT❌
 // Get All the NFT❌
 // Get the sepecific NFT❌

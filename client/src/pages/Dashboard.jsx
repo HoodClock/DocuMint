@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import {Settings, Notifications, ExitToApp, History, Logout, Info, AccountCircle} from '@mui/icons-material';
+import { Settings, ExitToApp, AccountCircle } from '@mui/icons-material';
 import NftCollection from '../components/NftCollections'
 import TxHistory from '../components/TxHistory'
 import Documentation from '../components/Documentation'
 import SideBar from '../components/SideBar';
 import UploadCard from '../components/UploadCard'
 import RecentActivity from '../components/RecentActivity'
+import ConnectWallet from '../components/ConnectWallet';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
@@ -79,11 +80,11 @@ function Dashboard() {
                     </h1>
                     <div className="flex space-x-4 items-center relative">
                         {/* Notification Icon */}
-                        <Notifications className="hover:text-yellow-400 cursor-pointer text-white" />
+                        <ConnectWallet />
 
                         {/* Profile Icon and Dropdown */}
                         <div
-                            className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center cursor-pointer relative border-2 border-white"
+                            className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center cursor-pointer relative"
                             onClick={() => setDropdownVisible(!dropdownVisible)}
                         >
                             <img src="./Images/LOGO.png" alt="User" className="w-full h-full object-cover" />
@@ -94,11 +95,11 @@ function Dashboard() {
                             <div className="absolute top-20 right-0 bg-gray-800 text-white shadow-lg rounded-md p-4 w-64 z-50">
                                 {/* User Info */}
                                 <div className="flex items-center space-x-4 mb-4">
-                                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-green-400">
+                                    <div className="w-14 h-14 rounded-full overflow-hidden">
                                         <img src="./Images/LOGO.png" alt="User" className="w-full h-full object-cover" />
                                     </div>
                                     <div>
-                                        <p className="text-lg font-semibold text-green-400">{userData?.username || "Loading..."}</p>
+                                        <p className="text-lg font-semibold text-yellow-400">{userData?.username || "Loading..."}</p>
                                         <p className="text-sm text-gray-400">{userData?.email || "Loading..."}</p>
                                     </div>
                                 </div>
@@ -130,7 +131,7 @@ function Dashboard() {
                     <UploadCard />
 
 
-                 {/* RECENT ACITVITY SECTION */}
+                    {/* RECENT ACITVITY SECTION */}
                     <RecentActivity />
                 </div>
 
