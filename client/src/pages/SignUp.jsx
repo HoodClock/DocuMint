@@ -8,7 +8,6 @@ function SignUp() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [walletAddress, setWalletAddress] = useState('');
 
     const navigate = useNavigate();
 
@@ -20,7 +19,6 @@ function SignUp() {
                 username: username,
                 email: email,
                 password: password,
-                walletAddress: walletAddress
             }
 
             await axios.post("http://localhost:3000/api/auth/signup/user-registeration", formData, { withCredentials: true });
@@ -75,20 +73,7 @@ function SignUp() {
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Password" />
                         </div>
-                        <div>
-                            <label htmlFor="password" className="sr-only">Wallet Address</label>
-                            <input
-                                onChange={(e) => setWalletAddress(e.target.value)}
-                                id="walletAddress"
-                                name="walletAddress"
-                                type="text"
-                                required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Wallet Address" />
-                        </div>
                     </div>
-
-
                     <div>
                         <button
                             type="submit"

@@ -1,18 +1,26 @@
 import React from 'react'
 import axios from 'axios'
 import { jwtDecode } from "jwt-decode";
+import { useWallet } from '../context/WalletContext'
 
 function TrasnformNFT() {
 
+    const [account, setAccount] = useWallet();
     const token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
 
     const decodedToken = jwtDecode(token);
     const userId = decodedToken.id;
-    console.log("USER-ID", userId);
 
     const handle_Trasnform_NFT = async () => {
         try {
-            axios.post(`http://localhost:3000/api/nfts/create/minting-new-nft/${userId}`);
+
+            if (!account) {
+                alert("Please Connect you wallet first");
+                return;
+            }
+
+            await axios.post(`http://localhost:3000/api/nfts/create/minting-new-nft/${userId}`, { account });
+
         } catch (error) {
             console.log("Axios Error: ", error);
         }

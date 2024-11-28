@@ -19,10 +19,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    walletAddress: {
-        type: String,
-        required: true
-    },
     documents: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Document'

@@ -1,10 +1,11 @@
 import { ethers } from 'ethers';
 import React, { useState } from 'react'
 import { Wallet, ContentCopy } from '@mui/icons-material';
+import { useWallet } from '../context/WalletContext'
 
 function ConnectWallet() {
 
-    const [account, setAccount] = useState(null);
+    const { account, setAccount } = useWallet();
     const [showAccount, setShowAccount] = useState(false);
     const [showTag, setShowTag] = useState(false);
 

@@ -8,9 +8,9 @@ const jwt = require('jsonwebtoken');
 
 exports.signUp = async (req, res) => {
     try {
-        const { username, email, password, walletAddress } = req.body;
+        const { username, email, password } = req.body;
 
-        if (!username || !email || !password || !walletAddress) {
+        if (!username || !email || !password) {
             return res.status(401).json({ message: "User Credentials are missing" });
         }
 
@@ -18,7 +18,6 @@ exports.signUp = async (req, res) => {
             username,
             email,
             password,
-            walletAddress,
         });
 
         const token = jwt.sign({ id: new_user._id }, process.env.JWTSECRETKEY, {

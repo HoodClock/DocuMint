@@ -6,9 +6,9 @@ import Documentation from '../components/Documentation'
 import SideBar from '../components/SideBar';
 import UploadCard from '../components/UploadCard'
 import RecentActivity from '../components/RecentActivity'
-import ConnectWallet from '../components/ConnectWallet';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import ConnectWallet from '../components/ConnectWallet';
 
 function Dashboard() {
 
