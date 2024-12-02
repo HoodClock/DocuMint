@@ -146,6 +146,9 @@ function Dashboard() {
                 </div>
                 {/* Showcasing different Components on above choices */}
                 <div className='m-2'>{activeTab === 'NFT' ? <NftCollection /> : activeTab === 'Tx' ? <TxHistory /> : <Documentation />}</div>
+                <div>
+                    <p className='font-semibold'>@ 2024/25 <span className='text-red-500'>Moiz Ali</span> Carved and Created by your's truly</p>
+                </div>
             </main>
         </div>
     )

@@ -14,6 +14,7 @@ const profileRouter = require('./routes/Dashboard/profile.routes');
 const UploadDocumentRouter = require('./routes/Documents/uploadDocument.routes');
 const getAllUserDocument = require('./routes/Documents/getAllDocuments.routes');
 const CreateNewNFT = require('./routes/NFTs/createNewNFT.routes');
+const FetchAllNfts = require('./routes/NFTs/gettingAllNFT.routes');
 
 // configuration of DotENV
 dotenv.config();
@@ -49,7 +50,7 @@ app.use('/api/documents/allDocuments', getAllUserDocument) // GET
 
 // // NFT creation and management
 app.use('/api/nfts/create', CreateNewNFT); // POST
-// app.use('/api/nfts'); // GET
+app.use('/api/nfts/fetch', FetchAllNfts); // GET
 // app.use('/api/nfts/:id'); // GET
 
 // // Transaction endpoint

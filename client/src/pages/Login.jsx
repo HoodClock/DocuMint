@@ -13,12 +13,14 @@ const Login = () => {
         e.preventDefault();
 
         try {
+
             const formData = {
                 username: username,
                 password: password
             }
 
-            const response = await axios.post('http://localhost:3000/api/auth/login/auth-user', formData, { withCredentials: true });
+            await axios.post('http://localhost:3000/api/auth/login/auth-user', formData, { withCredentials: true });
+
             navigate('/dashboard');
 
         } catch (error) {

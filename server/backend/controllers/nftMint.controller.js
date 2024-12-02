@@ -1,10 +1,12 @@
 const documentModel = require('../models/Document.model');
 const userModel = require('../models/User.model');
+const nftModel = require('../models/NFT.model');
+const txModel = require('../models/TransactionHistory.model');
 const { get_Contract_with_User } = require('../helpers/contractHelper');
 
 // NEED INTEGRATE THE WALLET (META MASK);
 
-// Create the NFT❌
+// Create the NFT ✅
 // Get All the NFT❌
 // Get the sepecific NFT❌
 
@@ -13,38 +15,68 @@ exports.mintNFT = async (req, res) => {
     try {
         const userId = req.params.userId;
 
-        console.log("USER ID", userId);
+        const account_Wallet_Address = req.body.account;
 
         const user = await userModel.findById(userId);
 
-        console.log("User", user);
-
-        // NEED TO GET THE DOCUMENT ID WHICH IS JUST UPLOADED YET.
-
         const lastDocument = await documentModel.findOne().sort({ createdAt: -1 });
-
-        console.log("LAST DOCUMENT", lastDocument);
-
 
         if (!lastDocument) {
             return res.status(404).json({ message: "Document not found" });
         }
 
+        const documentID = lastDocument._id;
+        const pixelsArtThumbnail = `${process.env.DICE_BEAR_API}?seed=${documentID}`
+
         const metaData = lastDocument.IPFSHash;
 
-        const transaction = await get_Contract_with_User(req, res, user.walletAddress, metaData, user);
+        const transaction = await get_Contract_with_User(req, res, account_Wallet_Address, metaData, user);
+
         await transaction.wait();
 
-        lastDocument.status = 'Minted';
+        const documentStatus = lastDocument.status = 'Minted';
         lastDocument.nftMinted = true;
         await lastDocument.save();
 
+        // Add the minted NFT to the user Model
+        const nft = new nftModel({
+            owner: userId,
+            document: lastDocument._id,
+            nftThumbnail: pixelsArtThumbnail,
+            ipfsHash: metaData,
+            status: documentStatus
+        })
 
-        user.nfts.push({ document: lastDocument._id, nftStatus: 'Minted' });
+        await nft.save();
+
+        // Now record the transaction to user Model through TxModel
+        const tx = new txModel({
+            user: userId,
+            nft: nft._id,
+            transactionType: "Minted",
+            transactionHash: transaction.hash,
+        })
+
+        await tx.save();
+
+        user.nfts.push(nft._id);
+        user.transactionHistroy.push(tx._id);
         await user.save();
 
         res.status(200).json({ message: "NFT minted Successfully" });
     } catch (error) {
         res.status(500).json({ message: "Server Internal Error Occuring", error });
     }
-} 
+}
+
+exports.getNfts = async (req, res) => {
+    try {
+        const nfts = await nftModel.find({});
+        console.log(nfts);
+
+        res.status(200).json({ success: true, nfts: nfts });
+
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+}

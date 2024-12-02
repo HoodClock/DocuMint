@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import UploadDocs from './UploadDocs';
 import TransformNFT from './TrasnformNFT';
-import { Stepper, Step, StepLabel, Button, Box } from '@mui/material';
 
 function UploadCard() {
     const [step, setStep] = useState(0); // Step 0 for UploadDocs, Step 1 for TransformNFT

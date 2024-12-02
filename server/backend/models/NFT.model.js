@@ -11,6 +11,10 @@ const nftSchema = new mongoose.Schema({
         ref: 'Document',
         required: true
     },
+    nftThumbnail: {
+        type: String,
+        required: true
+    },
     ipfsHash: {
         type: String,
         required: true

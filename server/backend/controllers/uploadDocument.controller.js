@@ -65,6 +65,7 @@ exports.getAllDocuments = async (req, res) => {
         const documents = await documentModel.find({});
 
         res.status(200).json({ success: true, data: documents });
+
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
