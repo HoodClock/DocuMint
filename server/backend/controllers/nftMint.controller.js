@@ -7,7 +7,7 @@ const { get_Contract_with_User } = require('../helpers/contractHelper');
 // NEED INTEGRATE THE WALLET (META MASK);
 
 // Create the NFT ✅
-// Get All the NFT❌
+// Get All the NFT ✅
 // Get the sepecific NFT❌
 
 exports.mintNFT = async (req, res) => {
@@ -71,10 +71,13 @@ exports.mintNFT = async (req, res) => {
 
 exports.getNfts = async (req, res) => {
     try {
-        const nfts = await nftModel.find({});
-        console.log(nfts);
+        const nfts = await nftModel.find({ owner: req.user._id });
 
-        res.status(200).json({ success: true, nfts: nfts });
+        if (!nfts.length) {
+            return res.status(404).json({ success: false, message: "No NFTs found for this user." });
+        }
+
+        res.status(200).json({ success: true, nfts });
 
     } catch (error) {
         return res.status(500).json({ success: false, error: error.message });

@@ -62,7 +62,7 @@ exports.upload = async (req, res) => {
 exports.getAllDocuments = async (req, res) => {
     try {
 
-        const documents = await documentModel.find({});
+        const documents = await documentModel.find({ owner: req.user._id });
 
         res.status(200).json({ success: true, data: documents });
 

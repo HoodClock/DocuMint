@@ -5,9 +5,8 @@ import { useWallet } from '../context/WalletContext'
 
 function TrasnformNFT() {
 
-    const {account, setAccount} = useWallet();
+    const { account, setAccount } = useWallet();
 
-    console.log(account);
     const token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
 
     const decodedToken = jwtDecode(token);

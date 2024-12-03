@@ -9,7 +9,7 @@ function RecentActivity() {
         try {
 
             const getDocuments = async () => {
-                const response = await axios.get('http://localhost:3000/api/documents/allDocuments/fetched-documents');
+                const response = await axios.get('http://localhost:3000/api/documents/allDocuments/fetched-documents', { withCredentials: true });
                 let DocsCollectionLength = response.data.data.length - 2
                 setData(response.data.data.slice(DocsCollectionLength));
             }
@@ -39,19 +39,27 @@ function RecentActivity() {
                             <td colSpan="3" className="border-b-2 border-zinc-100" />
                         </tr>
                     </thead>
-                    {data?.map((documentData) => (
-                        <tbody key={documentData._id}>
-                            <tr className="border-b border-gray-700">
-                                <td className="p-4 text-gray-200 flex items-center">
-                                    {documentData.title}
-                                </td>
-                                <td className="p-4 text-gray-400">
-                                    {new Date(documentData.createdAt).toLocaleDateString('en-GB')}
-                                </td>
-                                <td className="p-4 text-yellow-400">{documentData.docType}</td>
-                            </tr>
-                        </tbody>
-                    ))}
+                    {data?.length > 0 ? (
+                        data.map((documentData) => (
+                            <tbody key={documentData._id}>
+                                <tr className="border-b border-gray-700">
+                                    <td className="p-4 text-gray-200 flex items-center">
+                                        {documentData.title}
+                                    </td>
+                                    <td className="p-4 text-gray-400">
+                                        {new Date(documentData.createdAt).toLocaleDateString('en-GB')}
+                                    </td>
+                                    <td className="p-4 text-yellow-400">{documentData.docType}</td>
+                                </tr>
+                            </tbody>
+                        ))
+                    ) : (
+                        <div className="flex justify-center items-center p-4">
+                            <div className="text-gray-500 text-lg">
+                                <i className="fas fa-box-open text-3xl mr-2"></i> No documents found
+                            </div>
+                        </div>
+                    )}
                 </table>
             </section >
         </>

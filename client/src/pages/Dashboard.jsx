@@ -141,13 +141,13 @@ function Dashboard() {
                     <div className='flex items-center gap-9'>
                         <h2 onClick={() => setActiveTab("NFT")} className='font-sans font-bold text-xl p-2 hover: cursor-pointer hover:text-[#DBFD2D]'>User NFT's</h2>
                         <h2 onClick={() => setActiveTab("Tx")} className='font-sans font-bold text-xl p-2 hover: cursor-pointer hover:text-[#DBFD2D]'>Transactions</h2>
-                        <h2 onClick={() => setActiveTab("Docs")} className='font-sans font-bold text-xl p-2 hover: cursor-pointer hover:text-[#DBFD2D]'>How it works</h2>
+                        <h2 onClick={() => setActiveTab(    "Docs")} className='font-sans font-bold text-xl p-2 hover: cursor-pointer hover:text-[#DBFD2D]'>How it works</h2>
                     </div>
                 </div>
                 {/* Showcasing different Components on above choices */}
                 <div className='m-2'>{activeTab === 'NFT' ? <NftCollection /> : activeTab === 'Tx' ? <TxHistory /> : <Documentation />}</div>
                 <div>
-                    <p className='font-semibold'>@ 2024/25 <span className='text-red-500'>Moiz Ali</span> Carved and Created by your's truly</p>
+                    <p className='font-semibold'>@ 2024/25 Carved and Created by <span className='text-red-500'>Moiz Ali</span></p>
                 </div>
             </main>
         </div>
