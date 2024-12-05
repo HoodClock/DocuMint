@@ -1,13 +1,12 @@
 const userModel = require('../models/User.model');
 const jwt = require('jsonwebtoken');
 
-// Create Account✅
-// Login✅
-// Logout✅
-// Delete
-
 exports.signUp = async (req, res) => {
     try {
+
+        console.log("Signed IN")
+
+
         const { username, email, password } = req.body;
 
         if (!username || !email || !password) {
@@ -36,6 +35,7 @@ exports.signUp = async (req, res) => {
 exports.login = async (req, res) => {
     try {
 
+        console.log("LOGGED IN")
         const { username, password } = req.body;
 
         if (!username || !password) {

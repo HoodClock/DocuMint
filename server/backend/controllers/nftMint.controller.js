@@ -8,7 +8,7 @@ const { get_Contract_with_User } = require('../helpers/contractHelper');
 
 // Create the NFT ✅
 // Get All the NFT ✅
-// Get the sepecific NFT❌
+// Get the Latest NFT
 
 exports.mintNFT = async (req, res) => {
 
@@ -81,5 +81,15 @@ exports.getNfts = async (req, res) => {
 
     } catch (error) {
         return res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+exports.lastNft = async (req, res) => {
+    try {
+        const latestNft = await nftModel.findOne().sort({ mintDate: -1 });
+
+        res.status(200).json({ success: true, latestNft });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal Server Error" });
     }
 }

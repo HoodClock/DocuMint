@@ -5,6 +5,8 @@ import axios from 'axios';
 function Profile() {
 
     const [userData, setUserData] = useState(null);
+    const [lastNft, setLastNft] = useState(null);
+
 
     useEffect(() => {
         const profileRequest = async () => {
@@ -13,6 +15,13 @@ function Profile() {
         }
 
         profileRequest();
+
+        const getLastNft = async () => {
+            const response = await axios.get('http://localhost:3000/api/nfts/latestNft/last-nft-fetching', { withCredentials: true })
+            setLastNft(response.data.latestNft);
+        }
+
+        getLastNft();
 
     }, []);
 
@@ -58,7 +67,7 @@ function Profile() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-lg font-bold">NFTs Owned: <span className="font-bold text-green-300">5</span></p>
+                                    <p className="text-lg font-bold">NFTs Owned: <span className="font-bold text-green-300">{userData?.nfts.length}</span></p>
                                 </div>
                             </div>
 
@@ -82,7 +91,12 @@ function Profile() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-lg font-bold">Last NFT Created: <span className="font-bold text-gray-300">10/12/2024</span></p>
+                                    <p className="text-lg font-bold">
+                                        Last NFT Created:{" "}
+                                        <span className="font-bold text-gray-300">
+                                            {lastNft?.mintDate && new Date(lastNft.mintDate).toLocaleDateString("en-GB")}
+                                        </span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
