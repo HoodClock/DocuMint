@@ -9,6 +9,7 @@ import RecentActivity from '../components/RecentActivity'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import ConnectWallet from '../components/ConnectWallet';
+import { motion } from 'framer-motion'
 
 function Dashboard() {
 
@@ -163,8 +164,16 @@ function Dashboard() {
                     </div>
                 </div>
                 {/* Showcasing different Components on above choices */}
-                <div className='border-b-2 border-zinc-800 overflow-y-auto'>
-                    {activeTab === 'NFT' ? <NftCollection /> : activeTab === 'Tx' ? <TxHistory /> : <Documentation />}</div>
+                <motion.div
+                    key={activeTab}
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 50 }}
+                    transition={{ duration: 3 }}
+                    className="border-b-2 border-zinc-800 overflow-y-auto"
+                >
+                    {activeTab === 'NFT' ? <NftCollection /> : activeTab === 'Tx' ? <TxHistory /> : <Documentation />}
+                </motion.div>
                 <div>
                     <p className='font-semibold'>@ 2024/25 Carved and Created by <span className='text-red-500'>Moiz Ali</span></p>
                 </div>
