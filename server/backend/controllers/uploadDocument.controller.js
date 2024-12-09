@@ -60,6 +60,7 @@ exports.upload = async (req, res) => {
 }
 
 exports.getAllDocuments = async (req, res) => {
+
     try {
 
         const documents = await documentModel.find({ owner: req.user._id });
@@ -67,6 +68,9 @@ exports.getAllDocuments = async (req, res) => {
         res.status(200).json({ success: true, data: documents });
 
     } catch (error) {
+
         res.status(500).json({ success: false, error: error.message });
+
     }
+
 }

@@ -12,10 +12,10 @@ function UploadCard() {
 
     return (
         <div style={{
-            maxWidth: '600px',
+            maxWidth: '3600px',
             margin: 'auto',
-            padding: '20px',
-            backgroundColor: '#141721',
+            paddingTop: '20px',
+            background: 'linear-gradient(80deg, #380D67, #ec4878)', // Gradient from blue to pink
             borderRadius: '8px',
             color: 'white',
         }}>
@@ -24,7 +24,6 @@ function UploadCard() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '20px',
             }}>
                 <div style={{
                     width: '30px',
@@ -36,13 +35,13 @@ function UploadCard() {
                     fontSize: '16px',
                     fontWeight: 'bold',
                     color: '#fff',
-                    backgroundColor: step >= 0 ? '#6C63FF' : '#ccc',
+                    backgroundColor: step >= 0 ? '#380D67' : '#000',
                 }}>1</div>
 
                 <div style={{
                     width: '50px',
                     height: '4px',
-                    backgroundColor: step >= 1 ? '#6C63FF' : '#ccc',
+                    backgroundColor: step >= 1 ? '#380D67' : '#fff',
                     margin: '0 10px',
                 }}></div>
 
@@ -56,7 +55,7 @@ function UploadCard() {
                     fontSize: '16px',
                     fontWeight: 'bold',
                     color: '#fff',
-                    backgroundColor: step >= 1 ? '#6C63FF' : '#ccc',
+                    backgroundColor: step >= 1 ? '#FD4C8D' : '#000',
                 }}>2</div>
             </div>
 

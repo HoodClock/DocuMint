@@ -16,7 +16,7 @@ function NftCollections() {
     : nfts.filter((nft) => nft.status === selectedType);
 
   return (
-    <div className="bg-[#111318] p-6 rounded-lg shadow-lg mb-10">
+    <div className="bg-[#111318] p-6 rounded-lg shadow-lg mb-10 h-[calc(100vh-150px)] overflow-y-auto scrollbar-custom pt-10">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-white">NFT Collection</h2>
         <div className="flex items-center space-x-2">
@@ -42,7 +42,7 @@ function NftCollections() {
                 className="min-w-[250px] max-w-[250px] bg-[#111318] rounded-lg p-4 shadow-md cursor-pointer hover:bg-[#1d1f24] transition-all duration-200 mx-2 my-2"
                 onClick={() => setSelectedNFT(nft)}
               >
-                <div className="bg-[#DBFD2D] rounded-md h-40 mb-4 flex items-center justify-center overflow-hidden">
+                <div className="bg-gradient-to-r from-purple-800 to-pink-900 rounded-md h-40 mb-4 flex items-center justify-center overflow-hidden">
                   <img src={nft.nftThumbnail} className="object-cover h-full w-full" alt="NFT Thumbnail" />
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2">{nft.status}</h3>

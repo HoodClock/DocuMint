@@ -15,7 +15,8 @@ const UploadDocumentRouter = require('./routes/Documents/uploadDocument.routes')
 const getAllUserDocument = require('./routes/Documents/getAllDocuments.routes');
 const CreateNewNFT = require('./routes/NFTs/createNewNFT.routes');
 const FetchAllNfts = require('./routes/NFTs/gettingAllNFT.routes');
-const fetchLastNfts = require('./routes/NFTs/getLastNFT.routes')
+const fetchLastNfts = require('./routes/NFTs/getLastNFT.routes');
+const txhistoryRoutes = require('./routes/Transaction/tx.routes');
 
 // configuration of DotENV
 dotenv.config();
@@ -56,7 +57,7 @@ app.use('/api/nfts/fetch', FetchAllNfts); // GET
 // app.use('/api/nfts/:id'); // GET
 
 // // Transaction endpoint
-// app.use('/api/transactions'); // GET
+app.use('/api/transactions', txhistoryRoutes); // GET
 
 // // Wallet integration 
 // app.use('/api/wallet/connect'); // POST

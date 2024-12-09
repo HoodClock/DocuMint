@@ -42,19 +42,19 @@ function ConnectWallet() {
         <div>
             {!account ? (
                 <button onClick={connectWallet}>
-                    <Wallet className="hover:text-yellow-400 cursor-pointer text-white" />
+                    <Wallet className="hover:text-pink-500 cursor-pointer text-white" />
                 </button>
             ) : (
                 <>
                     <div className='flex justify-center'>
                         <button onClick={ShowHide}>
-                            <Wallet className="cursor-pointer pr-1 text-yellow-500" />
+                            <Wallet className="cursor-pointer pr-1 text-pink-500" />
                         </button>
                         {showAccount && (
                             <>
                                 <p className="text-white pr-3 pl-1 font-bold">{account.slice(0, 6)}...{account.slice(-4)}</p>
                                 <button onClick={handleCopyAccountAddress}>
-                                    <ContentCopy className='hover:text-yellow-400 text-sm' />
+                                    <ContentCopy className='hover:text-pink-500 text-sm' />
                                 </button>
 
                             </>
@@ -62,7 +62,7 @@ function ConnectWallet() {
 
                         {showTag && (
                             <div className='p-3 bg-zinc-900 rounded-md border-s-white'>
-                                <p className='text-yellow-400 font-semibold'>Address Copied</p>
+                                <p className='text-pink-500 font-semibold'>Address Copied</p>
                             </div>
                         )}
                     </div>

@@ -48,11 +48,15 @@ function UploadDocs({ onUploadComplete }) {
     return (
         <>
             {/* Container Box with Upload Icon and Text */}
-            < div className="bg-[#000000] p-10 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
+            < div className="p-10 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
                 onClick={handleOpenModel} // Open modal on click
             >
-                <UploadFileIcon style={{ color: '#FFF', fontSize: '5rem' }} />
-                <p className="mt-4 text-white font-bold text-center text-lg">Click to upload your document!</p>
+                <p className="mt-4 text-white font-extrabold text-center text-2xl">Create your own NFT!</p>
+                <div className='mt-5'>
+                    <button className='p-2 bg-zinc-50 font-semibold text-black rounded-md'>Upload Now
+                        <UploadFileIcon style={{ color: '#000', margin: "0.2rem", fontSize: '1rem' }} />
+                    </button>
+                </div>
             </div >
 
             {/* Modal for Upload Details */}

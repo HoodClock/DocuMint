@@ -8,7 +8,6 @@ const { get_Contract_with_User } = require('../helpers/contractHelper');
 
 // Create the NFT ✅
 // Get All the NFT ✅
-// Get the Latest NFT
 
 exports.mintNFT = async (req, res) => {
 
