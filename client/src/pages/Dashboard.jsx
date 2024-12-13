@@ -163,17 +163,20 @@ function Dashboard() {
                         </h2>
                     </div>
                 </div>
-                {/* Showcasing different Components on above choices */}
-                <motion.div
-                    key={activeTab}
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 50 }}
-                    transition={{ duration: 3 }}
-                    className="border-b-2 border-zinc-800 overflow-y-auto"
-                >
-                    {activeTab === 'NFT' ? <NftCollection /> : activeTab === 'Tx' ? <TxHistory /> : <Documentation />}
-                </motion.div>
+                <div className='h-50 w-50'>
+                    {/* Showcasing different Components on above choices */}
+                    <motion.div
+                        key={activeTab}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 3 }}
+                        layout
+                        className="relative overflow-hidden"
+                    >
+                        {activeTab === 'NFT' ? <NftCollection /> : activeTab === 'Tx' ? <TxHistory /> : <Documentation />}
+                    </motion.div>
+                </div>
                 <div>
                     <p className='font-semibold'>@ 2024/25 Carved and Created by <span className='text-red-500'>Moiz Ali</span></p>
                 </div>

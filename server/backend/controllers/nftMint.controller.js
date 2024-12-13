@@ -2,7 +2,8 @@ const documentModel = require('../models/Document.model');
 const userModel = require('../models/User.model');
 const nftModel = require('../models/NFT.model');
 const txModel = require('../models/TransactionHistory.model');
-const { get_Contract_with_User } = require('../helpers/contractHelper');
+const { provider, get_Contract_with_User } = require('../helpers/contractHelper');
+const ethers = require('ethers')
 
 // NEED INTEGRATE THE WALLET (META MASK);
 
@@ -33,6 +34,8 @@ exports.mintNFT = async (req, res) => {
 
         await transaction.wait();
 
+        const receipt = await provider.getTransactionReceipt(transaction.hash);
+
         const documentStatus = lastDocument.status = 'Minted';
         lastDocument.nftMinted = true;
         await lastDocument.save();
@@ -54,6 +57,11 @@ exports.mintNFT = async (req, res) => {
             nft: nft._id,
             transactionType: "Minted",
             transactionHash: transaction.hash,
+            from: transaction.from,
+            to: transaction.to,
+            gasUsed: receipt.gasUsed.toString(),
+            value: transaction.value ? ethers.formatEther(transaction.value) : "0.0",
+            blockNumber: transaction.blockNumber,
         })
 
         await tx.save();

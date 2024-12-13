@@ -1,7 +1,7 @@
 const { JsonRpcProvider, Contract } = require("ethers");
 const { contractAddress, contractABI } = require("../../Blockchain/config");
 
-const porvider = new JsonRpcProvider('http://127.0.0.1:8545');
+const provider = new JsonRpcProvider('http://127.0.0.1:8545');
 
 const get_Contract_with_User = async (req, res, account_Wallet_Address, metaData, user) => {
     try {
@@ -10,7 +10,7 @@ const get_Contract_with_User = async (req, res, account_Wallet_Address, metaData
             return res.status(404).json({ message: "User or Wallet Address not found" });
         }
 
-        const signer = await porvider.getSigner(account_Wallet_Address);
+        const signer = await provider.getSigner(account_Wallet_Address);
 
         // making the contract instance
         const contract = new Contract(contractAddress, contractABI, signer);
@@ -22,8 +22,8 @@ const get_Contract_with_User = async (req, res, account_Wallet_Address, metaData
 
     } catch (error) {
         console.log("Helper Contract Error: ", error);
-        return res.status(500).json({message: "Error setting up Contrat", error});
+        return res.status(500).json({ message: "Error setting up Contrat", error });
     }
 }
 
-module.exports = { get_Contract_with_User };
+module.exports = { provider, get_Contract_with_User };
