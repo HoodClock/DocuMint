@@ -26,7 +26,7 @@ function RecentActivity() {
         <>
             {/* Right: Recent Activity Box */}
             <section
-                className="p-6 rounded-lg mb-10 shadow-lg flex-grow"
+                className="p-5 rounded-lg shadow-lg"
                 style={{
                     background: 'linear-gradient(135deg, #1e3a8a, #3b0763, #ec4899)',
                     boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.5)',

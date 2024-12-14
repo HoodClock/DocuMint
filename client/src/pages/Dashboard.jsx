@@ -10,6 +10,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import ConnectWallet from '../components/ConnectWallet';
 import { motion } from 'framer-motion'
+import UserWallet from '../components/userWallet';
 
 function Dashboard() {
 
@@ -126,7 +127,7 @@ function Dashboard() {
                 </header>
 
                 {/* Hero Section - Upload Document Box */}
-                <div className="flex flex-wrap justify-center items-center h-[44%] space-x-8"> {/* Flex container for side-by-side layout */}
+                <div className="flex flex-wrap gap-2 justify-center items-center h-auto p-1 mt-10 space-x-10"> {/* Flex container for side-by-side layout */}
 
                     {/* Upload Section */}
                     <UploadCard />
@@ -134,7 +135,13 @@ function Dashboard() {
 
                     {/* RECENT ACITVITY SECTION */}
                     <RecentActivity />
+
+
+                    {/* User Wallet */}
+                    <UserWallet />
+
                 </div>
+
 
                 {/* Tabs for Navigation */}
                 <div className='border-b-2 border-zinc-800 pt-32'>
@@ -167,10 +174,10 @@ function Dashboard() {
                     {/* Showcasing different Components on above choices */}
                     <motion.div
                         key={activeTab}
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 1 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 3 }}
+                        exit={{ opacity: 0, y: -1 }}
+                        transition={{ duration: 1.5 }}
                         layout
                         className="relative overflow-hidden"
                     >

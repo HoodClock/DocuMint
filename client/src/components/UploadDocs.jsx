@@ -30,7 +30,6 @@ function UploadDocs({ onUploadComplete }) {
             formData.append('docType', docType);
             formData.append('document', docFile);
 
-            console.log("DocType", docType);
 
 
             await axios.post('http://localhost:3000/api/documents/upload/upload-document', formData,
@@ -48,13 +47,13 @@ function UploadDocs({ onUploadComplete }) {
     return (
         <>
             {/* Container Box with Upload Icon and Text */}
-            < div className="p-10 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
+            < div className="rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
                 onClick={handleOpenModel} // Open modal on click
             >
                 <p className="mt-4 text-white font-extrabold text-center text-2xl">Create your own NFT!</p>
                 <div className='mt-5'>
-                    <button className='p-2 bg-zinc-50 font-semibold text-black rounded-md'>Upload Now
-                        <UploadFileIcon style={{ color: '#000', margin: "0.2rem", fontSize: '1rem' }} />
+                    <button className='p-2 bg-zinc-100 hover:bg-blue-600 transition-transform duration-1 hover:text-white font-semibold text-black rounded-md'>Upload Now
+                        <UploadFileIcon style={{ color: '#000', margin: "0.3rem", fontSize: '1rem' }} />
                     </button>
                 </div>
             </div >
@@ -66,7 +65,7 @@ function UploadDocs({ onUploadComplete }) {
                         <div className="bg-[#141721] p-10 rounded-lg shadow-lg w-full max-w-lg relative">
                             {/* Close Button */}
                             <button
-                                className="absolute top-2 right-2 hover:text-[#f3cc4c] transition-colors"
+                                className="absolute top-3 right-2 hover:text-[#f3cc4c] transition-colors"
                                 onClick={handleCloseModel} // Close modal on click
                             >
                                 <CloseIcon />

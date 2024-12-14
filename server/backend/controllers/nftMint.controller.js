@@ -66,6 +66,8 @@ exports.mintNFT = async (req, res) => {
 
         await tx.save();
 
+
+
         user.nfts.push(nft._id);
         user.transactionHistroy.push(tx._id);
         await user.save();

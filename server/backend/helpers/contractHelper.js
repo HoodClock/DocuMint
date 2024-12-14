@@ -1,5 +1,6 @@
 const { JsonRpcProvider, Contract } = require("ethers");
 const { contractAddress, contractABI } = require("../../Blockchain/config");
+const ethers = require('ethers')
 
 const provider = new JsonRpcProvider('http://127.0.0.1:8545');
 
@@ -16,7 +17,9 @@ const get_Contract_with_User = async (req, res, account_Wallet_Address, metaData
         const contract = new Contract(contractAddress, contractABI, signer);
 
         // now for the trasnsaction
-        const transaction = await contract.mintDocument(account_Wallet_Address, metaData);
+        const transaction = await contract.mintDocument(account_Wallet_Address, metaData, {
+            value: ethers.parseEther("0.01"),
+        });
 
         return transaction;
 

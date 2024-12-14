@@ -16,15 +16,21 @@ contract DocumentNFT is ERC721 {
     constructor() ERC721("DocumentNFT", "DOC") {}
 
     // mint an NFT
-    function mintDocument(address to, string memory metadata) external {
+    function mintDocument(address to, string memory metadata) external payable {
+        require(
+            msg.value >= 0.01 ether,
+            "Insifficient Ether sent for minting."
+        );
         uint256 tokenId = _currentTokenId++;
         _mint(to, tokenId);
-        _tokenMetaData[tokenId] = metadata; // stores metadata
-        emit DocumentMinted(to, tokenId, metadata); // emiting event
+        _tokenMetaData[tokenId] = metadata;
+        emit DocumentMinted(to, tokenId, metadata);
     }
 
     // Get_Minted_NFT
-    function getTokenMetaData(uint256 tokenId) external view returns (string memory) {
+    function getTokenMetaData(
+        uint256 tokenId
+    ) external view returns (string memory) {
         return _tokenMetaData[tokenId]; // fetched metadata according to tokenID
     }
 }

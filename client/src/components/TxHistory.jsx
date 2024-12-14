@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import TransactionDetails from './transactionDetails'; // Corrected import
+import TransactionDetails from './transactionDetails';
 
 function TxHistoryList() {
   const [transactions, setTransactions] = useState([]);
@@ -12,13 +12,24 @@ function TxHistoryList() {
       try {
         const response = await axios.get('http://localhost:3000/api/transactions/get-trasnsaction', { withCredentials: true });
         setTransactions(response.data.tx);
-
       } catch (error) {
         console.error('Error fetching transactions:', error);
       }
     };
 
     fetchTransactions();
+  }, []);
+
+  const handleOutsideClick = (e) => {
+    if (!e.target.closest('.transaction-card')) {
+      setExpandedIndex(null);
+      setSelectedTransaction(null);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
   }, []);
 
   const getTypeColor = (type) => {
@@ -34,13 +45,9 @@ function TxHistoryList() {
     }
   };
 
-  function handleTransactionClick(transaction) {
-    setSelectedTransaction(transaction);
-  };
-
   const toggleExpand = (index, transaction) => {
-    setExpandedIndex(index === expandedIndex ? null : index); // Toggle expansion
-    handleTransactionClick(transaction);
+    setExpandedIndex(index === expandedIndex ? null : index);
+    setSelectedTransaction(index === expandedIndex ? null : transaction);
   };
 
   return (
@@ -50,7 +57,7 @@ function TxHistoryList() {
         {transactions.map((tx, index) => (
           <div
             key={index}
-            className={`bg-[#1a1d24] p-4 rounded-lg shadow-md transform transition-all duration-300 cursor-pointer ${index === expandedIndex ? 'scale-105' : 'hover:scale-105'
+            className={`transaction-card bg-[#1a1d24] p-4 rounded-lg shadow-md transform transition-all duration-300 cursor-pointer ${index === expandedIndex ? 'scale-105' : 'hover:scale-105'
               }`}
             onClick={() => toggleExpand(index, tx)}
           >
@@ -72,7 +79,7 @@ function TxHistoryList() {
             </div>
             {index === expandedIndex && (
               <div className="mt-4 p-4 bg-[#25282e] rounded-lg">
-                <TransactionDetails transaction={selectedTransaction} />
+                <TransactionDetails transaction={selectedTransaction} onClose={() => toggleExpand(index, null)} />
               </div>
             )}
           </div>

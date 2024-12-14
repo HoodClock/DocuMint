@@ -12,11 +12,15 @@ function UploadCard() {
 
     return (
         <div style={{
-            maxWidth: '3600px',
-            margin: 'auto',
-            paddingTop: '20px',
-            background: 'linear-gradient(80deg, #380D67, #ec4878)', // Gradient from blue to pink
-            borderRadius: '8px',
+            width: '22rem',
+            height: '18rem',
+            padding: '25px',
+            display: "flex",
+            boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.5)',
+            flexDirection: 'column',
+            justifyContent: "center",
+            background: 'linear-gradient(135deg, #1e3a8a, #3b0763, #ec4899)',
+            borderRadius: '6px',
             color: 'white',
         }}>
             {/* Custom Stepper */}
@@ -35,13 +39,13 @@ function UploadCard() {
                     fontSize: '16px',
                     fontWeight: 'bold',
                     color: '#fff',
-                    backgroundColor: step >= 0 ? '#380D67' : '#000',
+                    backgroundColor: step >= 0 ? '#3b0763' : '#ec4899',
                 }}>1</div>
 
                 <div style={{
                     width: '50px',
                     height: '4px',
-                    backgroundColor: step >= 1 ? '#380D67' : '#fff',
+                    backgroundColor: step >= 1 ? '#ec4899' : '#fff',
                     margin: '0 10px',
                 }}></div>
 
@@ -55,7 +59,7 @@ function UploadCard() {
                     fontSize: '16px',
                     fontWeight: 'bold',
                     color: '#fff',
-                    backgroundColor: step >= 1 ? '#FD4C8D' : '#000',
+                    backgroundColor: step >= 1 ? '#ec4899' : '#000000',
                 }}>2</div>
             </div>
 
