@@ -43,6 +43,7 @@ exports.upload = async (req, res) => {
         // Save the new document in collection of Document in MongoDB
         const newDocument = await documentModel.create({
             title: docName,
+            file: result.IpfsHash,
             description: docDesc,
             docType: docType,
             IPFSHash: result.IpfsHash,

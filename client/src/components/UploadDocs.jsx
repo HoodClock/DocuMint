@@ -52,7 +52,7 @@ function UploadDocs({ onUploadComplete }) {
             >
                 <p className="mt-4 text-white font-extrabold text-center text-2xl">Create your own NFT!</p>
                 <div className='mt-5'>
-                    <button className='p-2 bg-zinc-100 hover:bg-blue-600 transition-transform duration-1 hover:text-white font-semibold text-black rounded-md'>Upload Now
+                    <button className='p-2 bg-zinc-100 hover:bg-blue-600 transition-transform duration-2 hover:text-white font-semibold text-black rounded-md'>Upload Now
                         <UploadFileIcon style={{ color: '#000', margin: "0.3rem", fontSize: '1rem' }} />
                     </button>
                 </div>

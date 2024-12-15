@@ -18,6 +18,10 @@ const documentSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
+    file: {
+        type: String,
+        required: true
+    },
     IPFSHash: {
         type: String,
     },
