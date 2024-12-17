@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 import React, { useState } from 'react'
 import { Wallet, ContentCopy } from '@mui/icons-material';
 import { useWallet } from '../context/WalletContext'
+import { toast } from 'react-toastify'
 
 function ConnectWallet() {
 
@@ -21,6 +22,7 @@ function ConnectWallet() {
             }
         } catch (error) {
             console.log('Error connecting to wallet', error);
+            toast.error("Error connecting to wallet", { autoClose: 1000 });
         }
     }
 

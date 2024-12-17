@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -20,11 +21,13 @@ const Login = () => {
             }
 
             await axios.post('http://localhost:3000/api/auth/login/auth-user', formData, { withCredentials: true });
+            toast.success("Successfully Logged you In", { autoClose: 1000 });
 
             navigate('/dashboard');
 
         } catch (error) {
             console.log("Axios error occured", error);
+            toast.error("Failed to Logged you In", { autoClose: 1000 })
         }
 
     }

@@ -34,10 +34,8 @@ function Dashboard() {
                     {/* Upload Section */}
                     <UploadCard />
 
-
                     {/* RECENT ACITVITY SECTION */}
                     <RecentActivity />
-
 
                     {/* User Wallet */}
                     <UserWallet />

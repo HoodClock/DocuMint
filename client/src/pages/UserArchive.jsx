@@ -5,6 +5,7 @@ import { ArrowDropDown, Close, DarkMode, Download, LightMode, Preview } from "@m
 import axios from 'axios'
 import { jwtDecode } from "jwt-decode";
 import { useWallet } from '../context/WalletContext'
+import { toast } from 'react-toastify'
 
 const UserArchive = () => {
     const { documents, loading } = useFetchedDocuments();
@@ -30,14 +31,17 @@ const UserArchive = () => {
         try {
 
             if (!account) {
-                alert("Please Connect you wallet first");
+                toast.error("Please connect your wallet first!", { autoClose: 2000 });
                 return;
             }
 
             await axios.post(`http://localhost:3000/api/nfts/create/minting-new-nft/${userId}`, { account });
 
+            toast.success("Document is converted successfully", { autoClose: 2000 });
+            
         } catch (error) {
             console.log("Axios Error: ", error);
+            toast.error("Something went wrong! Please try again.", { autoClose: 2000 });
         }
     }
 

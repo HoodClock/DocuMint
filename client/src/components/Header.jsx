@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Settings, ExitToApp, AccountCircle } from '@mui/icons-material';
 import useVerify from '../context/verifyUserContext'; // Custom Hook
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
 
 function Header() {
 
@@ -18,9 +19,11 @@ function Header() {
             });
 
             navigate('/');
+            toast.info("You Log yourself out", { autoClose: 1000 });
 
         } catch (error) {
             console.log("Axios Error Occuring", error);
+            toast.error("Logout Failed", { autoClose: 1000 });
         }
 
     }
