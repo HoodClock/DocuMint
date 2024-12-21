@@ -158,7 +158,7 @@ function UploadDocs({ onUploadComplete }) {
                                         disabled={isLoading}
                                     >
                                         {isLoading ? (
-                                            <div className="w-15 h-15">
+                                            <div className="w-6 h-6">
                                                 <Lottie animationData={loaderAnimation.animation} loop autoplay />
                                             </div>
                                         ) : (

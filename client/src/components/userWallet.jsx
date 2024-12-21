@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from "react";
+import { useWallet } from "../context/WalletContext";
 import { ethers } from "ethers";
 
+
 function UserWallet() {
-    const [account, setAccount] = useState(null);
+    const { account } = useWallet();
     const [etherBalance, setEtherBalance] = useState(0);
 
-    const userWalletConnect = async () => {
-        try {
-            if (window.ethereum) {
-                const provider = new ethers.BrowserProvider(window.ethereum);
-                const accounts = await provider.send("eth_requestAccounts", []);
-
-                setAccount(accounts[0]);
-
-                // Get Ether balance
-                const balance = await provider.getBalance(accounts[0]);
-                const ether = ethers.formatEther(balance);
-                setEtherBalance(parseFloat(ether).toFixed(4));
-            } else {
-                alert("Please Install MetaMask");
-            }
-        } catch (error) {
-            console.error("Error connecting to wallet", error);
-        }
-    };
 
     useEffect(() => {
-        userWalletConnect();
-    }, []);
+        const fetchEtherBalance = async () => {
+            if (account && window.ethereum) {
+                try {
+                    const provider = new ethers.BrowserProvider(window.ethereum);
+                    const balance = await provider.getBalance(account);
+                    const ether = ethers.formatEther(balance);
+                    setEtherBalance(parseFloat(ether).toFixed(4));
+                } catch (error) {
+                    console.error("Error fetching wallet balance", error);
+                }
+            }
+        };
+
+        fetchEtherBalance();
+    }, [account]);
 
     return (
         <div

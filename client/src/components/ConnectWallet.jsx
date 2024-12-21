@@ -6,25 +6,24 @@ import { toast } from 'react-toastify'
 
 function ConnectWallet() {
 
-    const { account, setAccount } = useWallet();
+    const { connectWallet } = useWallet();
+    const { account } = useWallet();
     const [showAccount, setShowAccount] = useState(false);
     const [showTag, setShowTag] = useState(false);
 
-    const connectWallet = async () => {
-        try {
-            if (window.ethereum) {
+    const handleConnectWallet = async () => {
+        if (window.ethereum) {
+            try {
                 const provider = new ethers.BrowserProvider(window.ethereum);
                 const accounts = await provider.send("eth_requestAccounts", []);
-                setAccount(accounts[0]);
-                setShowAccount(true);
-            } else {
-                alert("Please Install Meta Mask");
+                connectWallet(accounts[0]); // Save wallet address in context and local storage
+            } catch (error) {
+                console.error("Error connecting to wallet", error);
             }
-        } catch (error) {
-            console.log('Error connecting to wallet', error);
-            toast.error("Error connecting to wallet", { autoClose: 1000 });
+        } else {
+            alert("Please install MetaMask!");
         }
-    }
+    };
 
     const ShowHide = async () => {
         setShowAccount((prev) => !prev);
@@ -43,7 +42,7 @@ function ConnectWallet() {
     return (
         <div>
             {!account ? (
-                <button onClick={connectWallet}>
+                <button onClick={handleConnectWallet}>
                     <Wallet className="hover:text-pink-500 cursor-pointer text-white" />
                 </button>
             ) : (

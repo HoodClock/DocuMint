@@ -10,7 +10,9 @@ function SideBar() {
                 {/* Sidebar Top */}
                 < div >
                     <div className="text-3xl text-white font-bold mb-10 tracking-wider hover:text-pink-500 cursor-pointer transition-all duration-300">
-                        DocuMint
+                        <a href="/">
+                            DocuMint
+                        </a>
                         <RequestPage />
                     </div>
                     <nav>
