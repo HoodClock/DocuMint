@@ -55,7 +55,7 @@ function Header() {
                         className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center cursor-pointer relative"
                         onClick={() => setDropdownVisible(!dropdownVisible)}
                     >
-                        <img src="./Images/LOGO.png" alt="User" className="w-full h-full object-cover" />
+                        <img src={userData?.profilePicture} alt="User" className="w-full h-full object-cover" />
                     </div>
 
                     {/* Dropdown Box */}
@@ -64,7 +64,7 @@ function Header() {
                             {/* User Info */}
                             <div className="flex items-center space-x-4 mb-4">
                                 <div className="w-14 h-14 rounded-full overflow-hidden">
-                                    <img src="./Images/LOGO.png" alt="User" className="w-full h-full object-cover" />
+                                    <img src={userData?.profilePicture} alt="User" className="w-full h-full object-cover" />
                                 </div>
                                 <div>
                                     <p className="text-lg font-bold text-pink-400">{userData?.username || "Loading..."}</p>

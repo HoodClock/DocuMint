@@ -10,6 +10,7 @@ function SignUp() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [gender, setGender] = useState('');
 
     const navigate = useNavigate();
 
@@ -21,6 +22,7 @@ function SignUp() {
                 username: username,
                 email: email,
                 password: password,
+                gender: gender
             }
 
             await axios.post("http://localhost:3000/api/auth/signup/user-registeration", formData, { withCredentials: true });
@@ -70,6 +72,20 @@ function SignUp() {
                             required
                         />
                         <label>Password</label>
+                    </div>
+                    <div className="user-box">
+                        <select
+                            id="gender"
+                            name="gender"
+                            onChange={(e) => setGender(e.target.value)}
+                            required
+                            className="bg-gray-900 text-white border border-gray-700 p-2 rounded"
+                        >
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
                     <a onClick={handleFormSubmission}>
                         Sign Up

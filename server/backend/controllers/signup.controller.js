@@ -1,20 +1,28 @@
 const userModel = require('../models/User.model');
 const jwt = require('jsonwebtoken');
+const generateAvatar = require('../utils/generateAvatars');
 
 exports.signUp = async (req, res) => {
     try {
 
-        const { username, email, password } = req.body;
+        const { username, email, password, gender } = req.body;
 
-        if (!username || !email || !password) {
+        if (!username || !email || !password || !gender) {
             return res.status(401).json({ message: "User Credentials are missing" });
         }
+
+
+        const avatarURL = generateAvatar(gender, username);
+
 
         const new_user = await userModel.create({
             username,
             email,
             password,
+            gender: gender,
+            profilePicture: avatarURL
         });
+
 
         const token = jwt.sign({ id: new_user._id }, process.env.JWTSECRETKEY, {
             expiresIn: process.env.JWTEXPIRES || '365d',

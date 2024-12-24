@@ -151,14 +151,14 @@ function UploadDocs({ onUploadComplete }) {
                                 </div>
 
                                 {/* Upload Button */}
-                                <div className="mt-8 flex justify-center">
+                                <div className="mt-8 flex justify-center items-center">
                                     <button
                                         className={` ${isbackGround ? "bg-gradient-to-r from-[#EC4899] via-[#A855F7] to-[#38BDF8] text-white py-3 w-full shadow-lg rounded-full hover:from-[#FFB84C] hover:to-[#EC4899] transition-transform duration-2 font-bold" : "bg-transparent py-3 w-full"}`}
                                         type='submit'
                                         disabled={isLoading}
                                     >
                                         {isLoading ? (
-                                            <div className="w-6 h-6">
+                                            <div className="w-28 h-28 flex m-auto">
                                                 <Lottie animationData={loaderAnimation.animation} loop autoplay />
                                             </div>
                                         ) : (

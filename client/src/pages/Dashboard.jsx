@@ -15,7 +15,6 @@ function Dashboard() {
     const [activeTab, setActiveTab] = useState('NFT');
     const userData = useVerifyUser();
 
-
     return (
         <div className="flex h-screen overflow-hidden bg-[#1C1E2A] text-white font-roboto">
 
@@ -28,6 +27,8 @@ function Dashboard() {
                 {/* Top bar */}
                 <Header />
 
+
+
                 {/* Hero Section - Upload Document Box */}
                 <div className="flex flex-wrap gap-2 justify-center items-center h-auto p-1 mt-10 space-x-10"> {/* Flex container for side-by-side layout */}
 
@@ -39,7 +40,6 @@ function Dashboard() {
 
                     {/* User Wallet */}
                     <UserWallet />
-
                 </div>
 
 

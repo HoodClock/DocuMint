@@ -17,6 +17,10 @@ const CreateNewNFT = require('./routes/NFTs/createNewNFT.routes');
 const FetchAllNfts = require('./routes/NFTs/gettingAllNFT.routes');
 const fetchLastNfts = require('./routes/NFTs/getLastNFT.routes');
 const txhistoryRoutes = require('./routes/Transaction/tx.routes');
+const assignQuestsRouter = require('./routes/Quests/assignQuests.routes');
+const fetchUserQuestsRouter = require('./routes/Quests/fetchUserQuestq.routes');
+const completeQuestRouter = require('./routes/Quests/completeQuest.routes');
+const fetchRewardsRouter = require('./routes/Quests/fetchRewards.routes');
 
 // configuration of DotENV
 dotenv.config();
@@ -59,9 +63,12 @@ app.use('/api/nfts/fetch', FetchAllNfts); // GET
 // // Transaction endpoint
 app.use('/api/transactions', txhistoryRoutes); // GET
 
-// // Wallet integration 
-// app.use('/api/wallet/connect'); // POST
-// app.use('/api/wallet/status'); // GET
+// // QUEST MANAGEMENT ENDPOINTS
+app.use('/api/quests/assign', assignQuestsRouter); // POST
+app.use('/api/quests/user', fetchUserQuestsRouter); // GET
+app.use('/api/quests/:id/complete', completeQuestRouter); // PUT
+app.use('/api/quests/rewards', fetchRewardsRouter); // GET
+
 
 
 
