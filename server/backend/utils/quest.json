@@ -1,0 +1,14 @@
+[
+    {
+        "title": "Upload X documents",
+        "description": "Earn rewards by uploading documents.",
+        "type": "free",
+        "points": 50
+    },
+    {
+        "title": "Mint Y NFTs",
+        "description": "Mint your document to convert it to an NFT.",
+        "type": "premium",
+        "points": 100
+    }
+]

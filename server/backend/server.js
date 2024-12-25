@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/db')
+const triggerWeeklyQuests = require('./utils/triggerWeeklyQuests');
 
 // ALL the Routes
 const signUpRouter = require("./routes/Registration/signIn.routes");
@@ -78,4 +79,5 @@ const PORT = process.env.PORT || 5000;
 // Listen to the Server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+    triggerWeeklyQuests(); // Trigger Weekly Quests Script
 })

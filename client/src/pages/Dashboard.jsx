@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import NftCollection from '../components/NftCollections'
 import TxHistory from '../components/TxHistory'
 import Documentation from '../components/Documentation'
+import Quests from '../components/Quests'
 import SideBar from '../components/SideBar';
 import UploadCard from '../components/UploadCard'
 import RecentActivity from '../components/RecentActivity'
@@ -62,6 +63,13 @@ function Dashboard() {
                             Transactions
                         </h2>
                         <h2
+                            onClick={() => setActiveTab("Quest")}
+                            className={`font-sans font-bold text-xl p-2 cursor-pointer ${activeTab === "Quest" ? "text-[#FD4C8D]" : "hover:text-[#FD4C8D] text-zinc-100"
+                                }`}
+                        >
+                            Your Quests
+                        </h2>
+                        <h2
                             onClick={() => setActiveTab("Docs")}
                             className={`font-sans font-bold text-xl p-2 cursor-pointer ${activeTab === "Docs" ? "text-[#FD4C8D]" : "hover:text-[#FD4C8D] text-zinc-100"
                                 }`}
@@ -81,7 +89,7 @@ function Dashboard() {
                         layout
                         className="relative overflow-hidden"
                     >
-                        {activeTab === 'NFT' ? <NftCollection /> : activeTab === 'Tx' ? <TxHistory /> : <Documentation />}
+                        {activeTab === 'NFT' ? <NftCollection /> : activeTab === 'Tx' ? <TxHistory /> : activeTab === 'Quest' ? <Quests /> : <Documentation />}
                     </motion.div>
                 </div>
                 <div>

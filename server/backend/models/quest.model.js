@@ -3,21 +3,20 @@ const mongoose = require('mongoose');
 const questSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true,
+        required: true
     },
     description: {
         type: String,
-        required: true,
+        required: true
     },
     points: {
         type: Number,
-        required: true,
-        default: 0,
+        required: true
     },
     type: {
         type: String,
         enum: ['free', 'premium'],
-        required: true,
+        required: true
     },
     status: {
         type: String,
