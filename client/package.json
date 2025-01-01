@@ -16,10 +16,7 @@
     "@mui/material": "^6.1.1",
     "@pinata/sdk": "^2.1.0",
     "@remixicon/react": "^4.6.0",
-    "apexcharts": "^4.1.0",
     "axios": "^1.7.7",
-    "chart.js": "^4.4.4",
-    "chartjs-adapter-date-fns": "^3.0.0",
     "ethers": "^6.13.2",
     "framer-motion": "^11.13.1",
     "jwt-decode": "^4.0.0",
@@ -31,7 +28,8 @@
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
-    "react-toastify": "^10.0.6"
+    "react-toastify": "^10.0.6",
+    "recharts": "^2.15.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

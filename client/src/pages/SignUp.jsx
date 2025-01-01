@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { toast } from 'react-toastify';
+import { RequestPage } from "@mui/icons-material"
 
 
 
@@ -39,6 +40,12 @@ function SignUp() {
 
     return (
         <div className="login-page">
+            <div className="flex justify-center items-center text-3xl text-white font-bold mb-10 tracking-wider hover:text-pink-500 cursor-pointer transition-all duration-300">
+                <a href="/">
+                    DocuMint
+                </a>
+                <RequestPage />
+            </div>
             <div className="login-box">
                 <h2 className='font-extrabold text-2xl'>Create an Account</h2>
 

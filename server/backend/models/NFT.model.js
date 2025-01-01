@@ -29,6 +29,4 @@ const nftSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-const NFT = mongoose.model('NFT', nftSchema);
-
-module.exports = NFT;
+module.exports = mongoose.model('NFT', nftSchema);

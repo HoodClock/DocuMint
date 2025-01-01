@@ -30,6 +30,4 @@ const transactionHistorySchema = new mongoose.Schema({
     blockNumber: { type: Number },
 }, { timestamps: true });
 
-const TransactionHistory = mongoose.model('TransactionHistory', transactionHistorySchema);
-
-module.exports = TransactionHistory;
+module.exports = mongoose.model('TransactionHistory', transactionHistorySchema);

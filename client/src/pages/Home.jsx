@@ -4,7 +4,10 @@ import NFTHomeAnimation from '../assets/animations/NFTSHomeAnimaiton.json'
 import AllcryptoCurrency from '../assets/animations/homeCryptoanimation.json'
 import Footer from '../components/Footer'
 import Lottie from 'lottie-react';
-
+import FAQ from '../components/FAQ'
+import Features from '../components/Features'
+import CTA from '../components/CTA'
+import HowItWorks from '../components/HowItWorks'
 
 function Home() {
     return (
@@ -16,12 +19,15 @@ function Home() {
                         <nav>
                             <ul className="flex space-x-6 text-gray-400">
                                 <li className="hover:text-pink-400 cursor-pointer font-extrabold">Features</li>
-                                <li className="hover:text-pink-400 cursor-pointer font-extrabold">Support</li>
-                                <li className="hover:text-pink-400 cursor-pointer font-extrabold">About</li>
+                                <li className="hover:text-pink-400 cursor-pointer font-extrabold">FAQs</li>
                                 <li className="hover:text-pink-400 cursor-pointer font-extrabold">How it Works</li>
                             </ul>
                         </nav>
-                        <button className="bg-purple-500 text-white py-2 px-4 hover:bg-purple-700 rounded-full font-extrabold">Sign Up</button>
+                        <button className="bg-purple-500 text-white py-2 px-4 hover:bg-purple-700 rounded-full font-extrabold">
+                            <a href="/signup">
+                                Sign Up
+                            </a>
+                        </button>
                     </div>
                 </header>
             </div>
@@ -55,12 +61,19 @@ function Home() {
                     </div>
                 </section>
 
-                <section className="mt-16 text-center">
-                    <h2 className="text-3xl font-bold text-gray-300">Mint Faster. Earn More with DocuMint</h2>
-                    <button className="mt-4 bg-pink-500 text-white py-3 px-6 rounded-lg hover:bg-pink-700">
-                        <a href="/dashboard">Start Now</a>
-                    </button>
-                </section>
+                {/* CTA */}
+                <CTA />
+
+                {/* Features  */}
+                <Features />
+
+                {/* FAQs */}
+                <FAQ />
+
+                {/* How it works */}
+                <HowItWorks />
+
+                {/* Footer */}
                 <Footer />
             </main>
         </div>

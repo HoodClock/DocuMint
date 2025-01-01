@@ -24,36 +24,9 @@ const userSchema = new mongoose.Schema({
         enum: ['male', 'female', 'other'], // Include flexibility
         required: true // Needed for assigning avatars
     },
-    level: {
-        type: Number,
-        default: 1 // Starting level
-    },
-    experiencePoints: {
-        type: Number,
-        default: 0 // XP for leveling up
-    },
-    quests: [
-        {
-            questId: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Quest'
-            },
-            status: {
-                type: String,
-                enum: ['completed', 'missed', 'in-progress'],
-                default: 'in-progress'
-            },
-            isPremium: {
-                type: Boolean,
-                default: false
-            },
-            assignedAt: Date,
-            completedAt: Date
-        }
-    ],
     isPremiumUser: {
         type: Boolean,
-        default: false 
+        default: false
     },
     documents: [{
         type: mongoose.Schema.Types.ObjectId,

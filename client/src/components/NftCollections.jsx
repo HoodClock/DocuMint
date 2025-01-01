@@ -9,7 +9,6 @@ function NftCollections() {
   const [selectedType, setSelectedType] = useState('ALL');
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
 
   const filteredNFT = selectedType === 'ALL'
     ? nfts
@@ -53,7 +52,7 @@ function NftCollections() {
             ))}
           </div>
         ) : (
-          <p className="text-gray-400 text-center">No NFTs available or loading...</p>
+          <p className="text-gray-400 text-center">No NFTs available</p>
         )}
       </div>
 
