@@ -5,11 +5,17 @@ import UserDocumentStats from '../components/UserDocumentStats';
 import ArticleIcon from '@mui/icons-material/Article';
 import GridViewIcon from '@mui/icons-material/GridView';
 import UserNftStats from '../components/UserNftStats';
+import AttributionIcon from '@mui/icons-material/Attribution';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { toast } from 'react-toastify';
+
 
 function Profile() {
 
     const [userData, setUserData] = useState(null);
     const [lastNft, setLastNft] = useState(null);
+    const [username, setUsername] = useState(null);
+    const [email, setEmail] = useState(null);
 
 
     useEffect(() => {
@@ -28,10 +34,22 @@ function Profile() {
         getLastNft();
 
     }, []);
-    // /Images/profileBackground.jpg
+
+    const formData = {
+        username: username,
+        email: email
+    }
+
+    const handleUpdateProfile = async () => {
+        const response = await axios.put('http://localhost:3000/api/user/UpadteProfile/UpdateUserProfileCredentials', formData, { withCredentials: true });
+        toast.success("Your credentials are changed", { autoClose: 1000 });
+
+        navigate('/profile');
+    }
+
     return (
         <div className="h-screen max-h-screen bg-cover bg-center text-white font-poppins p-6 overflow-auto bg-[url('https://images2.alphacoders.com/137/1372963.png')]">
-            <div className="absolute inset-0 bg-black opacity-50"></div>
+            <div className="absolute inset-0 -z-10 bg-black opacity-50"></div>
             {/* Profile Header */}
             <div className="text-center w-full shadow-xl relative shadow-purple-500 opacity-85 h-48 rounded-xl object-cover bg-[url(/Images/profileBanner.jpg)] ">
                 <div className='absolute top-1/2 left-[10%] transform translate-x-[-50%] translate-y-[-50%] m-auto hover:scale-110 hover:cursor-pointer'>
@@ -49,7 +67,7 @@ function Profile() {
             </div>
 
             {/* Main Content */}
-            <div className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="mt-32 grid z-10 grid-cols-1 md:grid-cols-3 gap-6">
                 {/* About Section */}
                 <div className="bg-gradient-to-r from-[#2a2f4b] to-[#392160] p-6 rounded-3xl  shadow-xl">
                     <div className='flex'>
@@ -96,6 +114,60 @@ function Profile() {
                     <UserNftStats userData={userData} target={100} />
                 </div>
 
+                {/* Update Profile Section */}
+                <div className="bg-gradient-to-r from-[#2a2f4b] to-[#392160] p-6 rounded-3xl shadow-xl mt-6">
+                    <h2 className="text-lg font-bold mb-4 text-gray-200 flex items-center">
+                        <AttributionIcon style={{ color: "yellow", fontSize: "26px" }} />
+                        <span className="ml-2">Update Profile</span>
+                    </h2>
+                    <form className="space-y-4" onSubmit={handleUpdateProfile}>
+                        <input
+                            type="text"
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="New Username"
+                            name='username'
+                            className="w-full p-3 rounded-md bg-gray-700 text-gray-200 outline-none"
+                        />
+                        <input
+                            type="email"
+                            placeholder="New Email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            name='email'
+                            className="w-full p-3 rounded-md bg-gray-700 text-gray-200 outline-none"
+                        />
+                        <button className="w-full p-3 mt-3 bg-purple-800 rounded-md text-white font-bold hover:scale-105 hover:shadow-md transition-all">
+                            Save Changes
+                        </button>
+                    </form>
+                </div>
+
+                {/* Change Password Section */}
+                <div className="bg-gradient-to-r from-[#2a2f4b] to-[#392160] p-6 rounded-3xl shadow-xl mt-6">
+                    <h2 className="text-lg font-bold mb-4 text-gray-200 flex items-center">
+                        <VpnKeyIcon style={{ color: "yellow", fontSize: "26px" }} />
+                        <span className="ml-2">Change Password</span>
+                    </h2>
+                    <form className="space-y-4">
+                        <input
+                            type="password"
+                            placeholder="Current Password"
+                            className="w-full p-3 rounded-md bg-gray-700 text-gray-200 outline-none"
+                        />
+                        <input
+                            type="password"
+                            placeholder="New Password"
+                            className="w-full p-3 rounded-md bg-gray-700 text-gray-200 outline-none"
+                        />
+                        <input
+                            type="password"
+                            placeholder="Confirm New Password"
+                            className="w-full p-3 rounded-md bg-gray-700 text-gray-200 outline-none"
+                        />
+                        <button className="w-full p-3 mt-3 bg-purple-800 rounded-md text-white font-bold hover:scale-105 hover:shadow-md transition-all">
+                            Update Password
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     )

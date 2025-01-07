@@ -73,6 +73,7 @@ exports.mintNFT = async (req, res) => {
         await user.save();
 
         res.status(200).json({ message: "NFT minted Successfully" });
+        
     } catch (error) {
         res.status(500).json({ message: "Server Internal Error Occuring", error });
     }

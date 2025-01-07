@@ -24,19 +24,11 @@ function SideBar() {
                             <Inventory className="hover:text-pink-600 transition-all duration-200 cursor-auto" />
                             <span><a href="/archive">Archive</a></span>
                         </div>
-                        <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-zinc-100 hover:font-bold transition-all duration-200">
-                            <History className="hover:text-pink-600 transition-all duration-200 cursor-auto" />
-                            <span>Transaction History</span>
-                        </div>
                     </nav>
                 </div >
 
                 {/* Sidebar Bottom */}
                 < div >
-                    <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-zinc-100 hover:font-bold transition-all duration-200">
-                        <Settings className="hover:text-pink-600 transition-all duration-200 cursor-auto" />
-                        <span>Settings</span>
-                    </div>
                     <div className="flex items-center space-x-3 py-3 cursor-pointer hover:text-zinc-100 hover:font-bold transition-all duration-200">
                         <Info className="hover:text-pink-600 transition-all duration-200 cursor-auto" />
                         <span>About</span>

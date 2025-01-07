@@ -8,9 +8,9 @@ function CTA() {
                 <p className="text-lg mb-6">
                     Join DocuMint today and transform your documents into NFTs effortlessly!
                 </p>
-                <button className="relative overflow-hidden text-black bg-zinc-100 py-3 font-bold px-6 rounded-md text-xl group">
+                <button className="relative overflow-hidden text-pink-400 bg-zinc-900 py-3 font-bold px-6 rounded-lg text-xl group">
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-in-out"></span>
-                    <span className="relative z-10 group-hover:text-black">
+                    <span className="relative z-10 group-hover:text-white">
                         <a href="/dashboard">
                             Get Started Now
                         </a>

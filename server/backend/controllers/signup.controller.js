@@ -82,3 +82,27 @@ exports.logout = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error", error });
     }
 }
+
+exports.updateUserCredentials = async (req, res) => {
+    try {
+
+        const { username, email } = req.body;
+
+        const userId = req.user;
+
+        if (!username || !email) {
+            return res.status(401).json({ message: "Missing Credentials" });
+        }
+
+        const user = await userModel.findById(userId);
+
+        user.username = username;
+        user.email = email;
+
+        await user.save();
+
+
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error occured", error });
+    }
+}

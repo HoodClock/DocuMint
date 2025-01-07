@@ -17,6 +17,9 @@ const CreateNewNFT = require('./routes/NFTs/createNewNFT.routes');
 const FetchAllNfts = require('./routes/NFTs/gettingAllNFT.routes');
 const fetchLastNfts = require('./routes/NFTs/getLastNFT.routes');
 const txhistoryRoutes = require('./routes/Transaction/tx.routes');
+const UpdateProfileRouter = require('./routes/Registration/updateProfile.routes');
+const walletConnectionRouter = require('./routes/Wallet/wallet.routes');
+const fetchWalletAddressRouter = require('./routes/Wallet/getWalletAddress.routes');
 
 // configuration of DotENV
 dotenv.config();
@@ -44,6 +47,7 @@ app.use('/api/auth/login', loginRouter); // POST
 app.use('/api/auth/logout', logoutRouter); // GET
 app.use('/api/user/visiting', dashboardRouter) // GET
 app.use('/api/user/profile', profileRouter); // GET
+app.use('/api/user/UpadteProfile', UpdateProfileRouter); // UPDATE
 
 
 // // Document Management endpoint
@@ -59,6 +63,9 @@ app.use('/api/nfts/fetch', FetchAllNfts); // GET
 // // Transaction endpoint
 app.use('/api/transactions', txhistoryRoutes); // GET
 
+// // WALLET CONNECTION ENDPOINTS
+app.use('/api/wallet-connnection', walletConnectionRouter) // POST   
+app.use('/api/get-wallet-address', fetchWalletAddressRouter); // GET
 
 // setting up a port from env
 const PORT = process.env.PORT || 5000;
