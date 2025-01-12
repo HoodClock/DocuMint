@@ -10,7 +10,7 @@ export function WalletProvider({ children }) {
     useEffect(() => {
         const fetchWallet = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/get-wallet-address/fetch-wallet-address');
+                const response = await axios.get('http://localhost:3000/api/get-wallet-address/fetch-wallet-address', { withCredentials: true });
                 if (response.data.walletAddress) {
                     setAccount(response.data.walletAddress);
                 }
@@ -24,7 +24,8 @@ export function WalletProvider({ children }) {
 
     const connectWallet = async (walletAddress) => {
         try {
-            await axios.post('http://localhost:3000/api/wallet-connnection/set-cookie', { walletAddress }); // Save to backend cookie
+            const resp = await axios.post('http://localhost:3000/api/wallet-connnection/set-cookie', { walletAddress }, { withCredentials: true });
+
             setAccount(walletAddress); // Update context
         } catch (error) {
             console.error("Error setting wallet cookie", error);
@@ -33,8 +34,8 @@ export function WalletProvider({ children }) {
 
     const disconnectWallet = async () => {
         try {
+            await axios.get('http://localhost:3000/api/wallet-connection/disconnection-wallet', { withCredentials: true });
             setAccount(null); // Clear context
-            // Optionally: Clear wallet cookie (create an API route if needed)  yeah need to make this one too 👿
         } catch (error) {
             console.error("Error disconnecting wallet", error);
         }

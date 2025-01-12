@@ -20,6 +20,7 @@ const txhistoryRoutes = require('./routes/Transaction/tx.routes');
 const UpdateProfileRouter = require('./routes/Registration/updateProfile.routes');
 const walletConnectionRouter = require('./routes/Wallet/wallet.routes');
 const fetchWalletAddressRouter = require('./routes/Wallet/getWalletAddress.routes');
+const discoonnectWalletRouter = require('./routes/Wallet/disconnectWallet.routes');
 
 // configuration of DotENV
 dotenv.config();
@@ -31,7 +32,7 @@ const app = express();
 
 // middlewares
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:5173' || "http://localhost:3000",
     credentials: true // allows sending cookies with it
 }));
 app.use(cookieParser());
@@ -66,6 +67,7 @@ app.use('/api/transactions', txhistoryRoutes); // GET
 // // WALLET CONNECTION ENDPOINTS
 app.use('/api/wallet-connnection', walletConnectionRouter) // POST   
 app.use('/api/get-wallet-address', fetchWalletAddressRouter); // GET
+app.use('api/wallet-connection/', discoonnectWalletRouter) // GET
 
 // setting up a port from env
 const PORT = process.env.PORT || 5000;

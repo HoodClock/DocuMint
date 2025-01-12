@@ -25,13 +25,19 @@ function ConnectWallet() {
         }
     };
 
-    const ShowHide = () => setShowAccount((prev) => !prev);
+    const ShowHide = () => {
+        setShowAccount(false); // Hide account immediately
+        setTimeout(() => setShowAccount(true), 1000); // Show account after 1 second
+    };
 
     const handleCopyAccountAddress = async () => {
         await navigator.clipboard.writeText(account);
         setShowTag(true);
+        setShowAccount(false);
         setTimeout(() => setShowTag(false), 1000);
     };
+
+
 
     return (
         <div>
@@ -46,7 +52,9 @@ function ConnectWallet() {
                     </button>
                     {showAccount && (
                         <>
-                            <p className="text-white pr-3 pl-1 font-bold">{account.slice(0, 6)}...{account.slice(-4)}</p>
+                            <p className="text-white pr-3 pl-1 font-bold">
+                                {account.slice(0, 6)}...{account.slice(-4)}
+                            </p>
                             <button onClick={handleCopyAccountAddress}>
                                 <ContentCopy className="hover:text-pink-500 text-sm" />
                             </button>
