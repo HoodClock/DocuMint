@@ -5,18 +5,10 @@ exports.setWalletCookie = async (req, res) => {
     try {
         const { walletAddress } = req.body;
 
-        console.log('Request Body:', req.body);
-
-        console.log('WALLET ADDRESS', walletAddress);
-
-        console.log('Encryption Key:', process.env.ENCRYPTION_KEY);
-
         if (!walletAddress) return res.status(400).send('Wallet address is required');
 
         // now encrypt wallet address
         const encryptedWallet = encrypt(walletAddress);
-
-        console.log('Encrypted Wallet Address:', encryptedWallet);
 
         // Set wallet address in a secure HTTP-only cookie
         res.cookie('walletAddress', encryptedWallet, {
