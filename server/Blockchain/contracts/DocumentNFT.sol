@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.27;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol"; // for ERC-20
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol"; // for ERC-721
+import "./DocumentToken.sol";
 
 contract DocumentNFT is ERC721 {
     mapping(uint256 => string) private _tokenMetaData;
@@ -27,15 +27,18 @@ contract DocumentNFT is ERC721 {
 
     // mint an NFT
     function mintDocument(address to, string memory metadata) external payable {
-        // Ensuring user approval to spend
-        require(IERC20(tokenAddress).allowance(msg.sender, address(this)) >= mintingPrice, "Insufficient token allowence.");
-
-        // Transfer token from USER => CONTRACT
-        require(IERC20(tokenAddress).transferFrom(msg.sender, address(this), mintingPrice), "Token transfer failed.");
+        // Ensuring user approval to spend from your custom ERC-20 token
+        DocumentToken token = DocumentToken(tokenAddress); // Using the custom token contract
 
         require(
-            msg.value >= 0.01 ether,
-            "Insifficient Ether sent for minting."
+            token.allowance(msg.sender, address(this)) >= mintingPrice,
+            "Insufficient token allowance."
+        );
+
+        // Transfer token from USER => CONTRACT using the custom token contract
+        require(
+            token.transferFrom(msg.sender, address(this), mintingPrice),
+            "Token transfer failed."
         );
 
         uint256 tokenId = _currentTokenId++;
@@ -44,10 +47,3 @@ contract DocumentNFT is ERC721 {
         emit DocumentMinted(to, tokenId, metadata);
     }
 }
-
-// Get_Minted_NFT
-// function getTokenMetaData(
-//     uint256 tokenId
-// ) external view returns (string memory) {
-//     return _tokenMetaData[tokenId]; // fetched metadata according to tokenID
-// }
