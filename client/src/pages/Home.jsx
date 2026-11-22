@@ -7,7 +7,7 @@ import Lottie from 'lottie-react';
 import FAQ from '../components/FAQ'
 import Features from '../components/Features'
 import CTA from '../components/CTA'
-import HowItWorks from '../components/HowItWorks'
+import HowItWorks from './../components/HowItWorks-1'
 
 function Home() {
     return (
@@ -54,30 +54,4 @@ function Home() {
                     </div>
                     <div className="bg-gradient-to-tr from-pink-500 via-purple-500 to-blue-500 shadow-lg w-72 h-72 relative rounded-3xl p-6 text-center hover:scale-105 transition-transform">
                         <h2 className="text-2xl bg-white w-16 h-16 rounded-full absolute translate-x-[-50%] translate-y-[-50%] top-0 left-1/2 font-bold text-black flex items-center justify-center">#3</h2>
-                        <p className="mt-2 text-lg font-semibold text-gray-200">Secure your Documents in <br /> <span className='font-bold'>Unique NFTs</span></p>
-                        <div className="w-full h-40 mb-5">
-                            <Lottie animationData={NFTHomeAnimation} loop={true} />
-                        </div>
-                    </div>
-                </section>
-
-                {/* CTA */}
-                <CTA />
-
-                {/* Features  */}
-                <Features />
-
-                {/* FAQs */}
-                <FAQ />
-
-                {/* How it works */}
-                <HowItWorks />
-
-                {/* Footer */}
-                <Footer />
-            </main>
-        </div>
-    )
-}
-
-export default Home
+                  
