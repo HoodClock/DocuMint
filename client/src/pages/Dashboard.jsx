@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import NftCollection from '../components/NftCollections'
 import TxHistory from '../components/TxHistory'
-import Documentation from '../components/Documentation'
+import Documentation from './../components/HowItWorks-1'
 import SideBar from '../components/SideBar';
 import UploadCard from '../components/UploadCard'
 import RecentActivity from '../components/RecentActivity'
